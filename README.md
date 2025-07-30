@@ -1,6 +1,6 @@
 # Cmooa
 
-Un site des véhicules pour différent type de client développé avec Drupal 10/11 et un thème personnalisé.
+Un site de vente des lots et les enchères développé avec Drupal 10/11 et un thème personnalisé.
 
 
 
