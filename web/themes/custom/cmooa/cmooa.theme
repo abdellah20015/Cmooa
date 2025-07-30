@@ -1,0 +1,150 @@
+<?php
+
+use Drupal\cmooa\Services\RegionProcessor;
+use Drupal\cmooa\Services\ViewProcessor;
+use Drupal\cmooa\Services\BlockProcessor;
+use Drupal\cmooa\Services\NodeProcessor;
+use Drupal\cmooa\Services\UserProcessor;
+use Drupal\cmooa\Services\ResultsPageProcessor;
+use Drupal\cmooa\Services\NodeProcessors\LivestreamNodeProcessor;
+use Drupal\cmooa\Utilities\PathHelper;
+
+/**
+ * Preprocess page variables
+ */
+function cmooa_preprocess_page(array &$variables) {
+  PathHelper::setThemePath($variables);
+
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  $request_uri = \Drupal::request()->getRequestUri();
+
+  // Process livestream pages
+  if (preg_match('#^/livestream/(\d+)$#', $request_uri, $matches)) {
+    $node = \Drupal::entityTypeManager()->getStorage('node')->load($matches[1]);
+    if ($node && $node->bundle() === 'vente') {
+      $variables['node'] = $node;
+      $variables['#theme'] = 'page__livestream';
+      $variables['theme_hook_original'] = 'page';
+
+      $processor = new LivestreamNodeProcessor(\Drupal::service('entity_type.manager'));
+      $processor->process($variables);
+    }
+    return;
+  }
+
+  // Process results pages
+  if ($route_name === 'system.404' && strpos($request_uri, '/results') === 0) {
+    $processor = new ResultsPageProcessor(
+      \Drupal::service('entity_type.manager'),
+      \Drupal::service('current_user'),
+      \Drupal::service('database'),
+      \Drupal::service('file_url_generator')
+    );
+    $processor->processResultsPage($variables);
+    $variables['#theme'] = 'page__results';
+    $variables['#attached']['library'][] = 'cmooa/results-page';
+    return;
+  }
+
+  // Process user pages
+  if ($route_name === 'entity.user.canonical') {
+    $processor = new UserProcessor(
+      \Drupal::service('entity_type.manager'),
+      \Drupal::service('messenger')
+    );
+    $processor->processUserPage($variables);
+
+    $request = \Drupal::request();
+    $message_type = $request->headers->get('X-Message-Type');
+    $message_text = $request->headers->get('X-Message-Text');
+
+    if ($message_type && $message_text) {
+      $variables['message_type'] = $message_type;
+      $variables['message_text'] = $message_text;
+    }
+
+    $variables['#attached']['library'][] = 'cmooa/user-page';
+    return;
+  }
+
+  // Process content pages
+  if (isset($variables['node']) && $variables['node']->bundle() === 'page') {
+    NodeProcessor::processPageNode($variables);
+  }
+}
+
+/**
+ * Preprocess node variables
+ */
+function cmooa_preprocess_node(array &$variables) {
+  $request_uri = \Drupal::request()->getRequestUri();
+
+  // Skip processing for livestream pages (handled in preprocess_page)
+  if (preg_match('#^/livestream/(\d+)$#', $request_uri) &&
+      isset($variables['node']) &&
+      $variables['node']->bundle() === 'vente') {
+    return;
+  }
+
+  NodeProcessor::processNode($variables, \Drupal::service('entity_type.manager'));
+}
+
+/**
+ * Preprocess region variables
+ */
+function cmooa_preprocess_region(array &$variables) {
+  RegionProcessor::process($variables, \Drupal::service('entity_type.manager'));
+}
+
+/**
+ * Preprocess views variables
+ */
+function cmooa_preprocess_views_view(&$variables) {
+  ViewProcessor::processView($variables, \Drupal::service('entity_type.manager'));
+}
+
+/**
+ * Preprocess block variables
+ */
+function cmooa_preprocess_block(&$variables) {
+  BlockProcessor::processBlock($variables, \Drupal::service('entity_type.manager'));
+}
+
+/**
+ * Add page template suggestions
+ */
+function cmooa_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  if (preg_match('#^/livestream/(\d+)$#', \Drupal::request()->getRequestUri())) {
+    $suggestions[] = 'page__livestream';
+  }
+}
+
+/**
+ * Add node template suggestions
+ */
+function cmooa_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  $request_uri = \Drupal::request()->getRequestUri();
+
+  if (preg_match('#^/livestream/(\d+)$#', $request_uri) &&
+      isset($variables['elements']['#node']) &&
+      $variables['elements']['#node']->bundle() === 'vente') {
+    $suggestions[] = 'node__vente__livestream_full';
+    $suggestions[] = 'node__livestream__full';
+  }
+}
+
+/**
+ * Define custom theme hooks
+ */
+function cmooa_theme($existing, $type, $theme, $path) {
+  return [
+    'block__contact' => [
+      'base hook' => 'block',
+      'template' => 'block--cmooa-contact',
+    ],
+    'block__inscription' => [
+      'base hook' => 'block',
+      'template' => 'block--cmooa-inscription',
+    ],
+  ];
+}

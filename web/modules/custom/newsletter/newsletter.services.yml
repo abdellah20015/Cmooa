@@ -1,0 +1,4 @@
+services:
+  newsletter.service:
+    class: Drupal\newsletter\Service\NewsletterService
+    arguments: ['@form_builder', '@renderer']

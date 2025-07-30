@@ -1,0 +1,205 @@
+{% set page_title = 'Résultat des ventes' %}
+
+{% if page.header %}
+	{{ page.header }}
+{% endif %}
+
+<main id="main" role="main">
+<div class="results-page-wrapper">
+	<div class="head-listes">
+		<div class="tabs-listes">
+			<div class="tabs-item">
+				<a class="active" href="#liste-lots">Liste des lots</a>
+			</div>
+			{% if is_admin %}
+				<div class="tabs-item">
+					<a href="#liste-users">
+						Utilisateurs inscrits
+						<span>({{ registered_users_count }})</span>
+					</a>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="body-listes">
+		<!-- Liste des lots -->
+		<div class="inner-bosy-liste active" id="liste-lots">
+			<div class="list-livesream">
+				{% if lots_data %}
+					{% for lot in lots_data %}
+						<div class="item-livestream{% if lot.is_adjuged %} lot-adjuge{% endif %}">
+							<div class="visu-live">
+								{% if lot.has_image %}
+									<img src="{{ lot.image_url }}" alt="{{ lot.image_alt }}">
+								{% else %}
+									<div class="no-image-placeholder">
+										<span>Aucune image disponible</span>
+									</div>
+								{% endif %}
+							</div>
+							<div class="desc-live">
+								<h3>
+									<span>{{ lot.lot_id|number_format(0, '', '') }}</span>
+								</h3>
+								<p>
+									{{ lot.auteur }}
+									{% if lot.title %}
+										<span>{{ lot.title }}</span>
+									{% endif %}
+								</p>
+								<h5>{{ lot.estimation }}</h5>
+							</div>
+
+							{% if lot.is_adjuged %}
+								<div class="label-lot-adjuge">
+									<p>Lot adjugé
+										<span>{{ lot.adjuged_price }}</span>
+									</p>
+								</div>
+							{% else %}
+								{% if is_admin %}
+									<a href="{{ lot.lot_url }}">Démarrer la vente de ce lot</a>
+								{% endif %}
+							{% endif %}
+						</div>
+					{% endfor %}
+				{% else %}
+					<div class="no-lots-message">
+						<p>
+							{% if is_admin %}
+								Aucun lot trouvé dans le système.
+							{% else %}
+								Vous n'avez pas encore participé à des enchères.
+							{% endif %}
+						</p>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+
+		<!-- Liste des utilisateurs (admin seulement) -->
+		{% if is_admin %}
+			<div class="inner-bosy-liste" id="liste-users">
+				<div class="list-users">
+					<div class="label-users label-users-retour">
+						<p>
+							<span class="nbr-inscrits">{{ registered_users_count }}</span>
+							utilisateurs inscrits /
+							<span class="nbr-connectes">{{ connected_users_count }}</span>
+							connectés
+						</p>
+						<div class="option-tri">
+							<select class="form-select" name="user-sort">
+								<option value="">Trier</option>
+								<option value="a-z">A-Z</option>
+								<option value="z-a">Z-A</option>
+							</select>
+						</div>
+					</div>
+
+					{% if users_data %}
+						{% for user in users_data %}
+							<div class="item-user{% if user.is_connected %} connecte{% endif %}">
+								<p>{{ user.name }}</p>
+								<a href="{{ user.profile_url }}">Voir le profil</a>
+							</div>
+						{% endfor %}
+					{% else %}
+						<div class="no-users-message">
+							<p>Aucun utilisateur inscrit trouvé.</p>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</div>
+</main>
+
+{% if page.footer %}
+	<footer class="footer">
+		{{ page.footer }}
+	</footer>
+{% endif %}
+
+<style>
+.no-image-placeholder {
+	background-color: #f5f5f5;
+	border: 2px dashed #ccc;
+	height: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #999;
+	font-size: 14px;
+}
+</style>
+
+<script>
+	// Script pour gérer les onglets
+document.addEventListener('DOMContentLoaded', function () {
+const tabLinks = document.querySelectorAll('.tabs-item a');
+const tabContents = document.querySelectorAll('.inner-bosy-liste');
+
+tabLinks.forEach(function (link) {
+link.addEventListener('click', function (e) {
+e.preventDefault();
+
+// Remove active class from all tabs and contents
+tabLinks.forEach(function (l) {
+l.classList.remove('active');
+});
+tabContents.forEach(function (c) {
+c.classList.remove('active');
+});
+
+// Add active class to clicked tab
+this.classList.add('active');
+
+// Show corresponding content
+const targetId = this.getAttribute('href').substring(1);
+const targetContent = document.getElementById(targetId);
+if (targetContent) {
+targetContent.classList.add('active');
+}
+});
+});
+
+// Sort functionality for users list
+const sortSelect = document.querySelector('select[name="user-sort"]');
+if (sortSelect) {
+sortSelect.addEventListener('change', function () {
+const usersList = document.querySelector('.list-users');
+const users = Array.from(usersList.querySelectorAll('.item-user'));
+const labelUsers = usersList.querySelector('.label-users');
+
+if (this.value === 'a-z') {
+users.sort((a, b) => {
+const nameA = a.querySelector('p').textContent.trim();
+const nameB = b.querySelector('p').textContent.trim();
+return nameA.localeCompare(nameB);
+});
+} else if (this.value === 'z-a') {
+users.sort((a, b) => {
+const nameA = a.querySelector('p').textContent.trim();
+const nameB = b.querySelector('p').textContent.trim();
+return nameB.localeCompare(nameA);
+});
+}
+
+// Rebuild the users list
+usersList.innerHTML = labelUsers.outerHTML;
+users.forEach(user => {
+usersList.appendChild(user);
+});
+});
+}
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.title = 'Résultat des ventes - {{ site_name|default('Cmooa') }}';
+});
+</script>

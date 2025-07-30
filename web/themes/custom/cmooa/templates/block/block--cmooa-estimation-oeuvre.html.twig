@@ -1,0 +1,24 @@
+<div class="estime-oeuvre">
+  <div class="container">
+    <div class="row">
+      <div class="c-estime-oeuvre">
+        <div class="col-visu-estime">
+          {% if estime_data.image %}
+            <img src="{{ file_url(estime_data.image) }}" alt="{{ estime_data.image_alt }}">
+          {% endif %}
+        </div>
+        <div class="col-desc-estime">
+          {% if estime_data.titre %}
+            <h3>{{ estime_data.titre }}</h3>
+          {% endif %}
+          {% if estime_data.description %}
+            <p>{{ estime_data.description|raw }}</p>
+          {% endif %}
+          {% if estime_data.lien.url %}
+            <a href="{{ estime_data.lien.url }}">{{ estime_data.lien.text }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

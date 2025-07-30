@@ -1,0 +1,60 @@
+{#
+/**
+ * @file
+ * El Hourria's theme implementation to display a single page.
+ *
+ * Available variables:
+ * - page: The page template variables
+ * - logged_in: A flag indicating if user is logged in.
+ * - is_admin: A flag indicating if user has admin permissions.
+ * - attributes: HTML attributes for the page element.
+ */
+#}
+
+<html{{html_attributes}}>
+	<head>
+		<head-placeholder token="{{ placeholder_token }}">
+			<title>{{ head_title|safe_join(' | ') }}</title>
+			<css-placeholder token="{{ placeholder_token }}">
+				<js-placeholder token="{{ placeholder_token }}"></head>
+				<body{{body_attributes}}>
+					{%
+          set classes = [
+             'block',
+             'block-' ~ configuration.provider|clean_class,
+             'block-' ~ plugin_id|clean_class,
+             'main-header'
+            ]
+          %}
+
+					{% if page.header %}
+						{{ page.header }}
+					{% endif %}
+
+					<main id="main" role="main">
+						{% if page.top_content %}
+							<div class="top-content">
+								{{ page.top_content }}
+							</div>
+						{% endif %}
+
+
+						{% if page.content %}
+							{{ page.content }}
+						{% endif %}
+
+						{% if page.bottom_content %}
+							<div class="bottom-content">
+								{{ page.bottom_content }}
+							</div>
+						{% endif %}
+					</main>
+
+					{% if page.footer %}
+						<footer class="footer">
+							{{ page.footer }}
+						</footer>
+					{% endif %}
+
+					<js-bottom-placeholder token="{{ placeholder_token }}"></body>
+				</html>

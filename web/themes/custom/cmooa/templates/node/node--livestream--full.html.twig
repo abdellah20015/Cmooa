@@ -1,0 +1,276 @@
+{# Template livestream avec YouTube #}
+<main id="main" role="main">
+	<div class="head-lot">
+		<div class="container">
+			<div class="row">
+				<div class="c-head-lot">
+					<a class="back-lot" href="/vente/{{ vente.nid }}">Retour à la liste de lots</a>
+					<div class="ilustration-lot">
+						<img src="{{ vente.image_url }}" alt="{{ vente.image_alt }}">
+						<p>Vente n°
+							{{ vente.vente_numero }}
+							- Lot n°
+							{{ current_lot_to_use.nid ?? 'Aucun lot sélectionné' }}
+							<span>{{ vente.title }}</span>
+						</p>
+					</div>
+					<div class="date-enchere-lot">
+						<p>{{ vente.date_label }}
+							<span>{{ vente.lieu }}</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="box-live">
+		<div class="container">
+			<div class="row">
+				<div class="live-label-title">Livestream</div>
+				<div class="inner-box-live">
+					<a class="refresh" href="javascript:void(0);" onclick="refreshYouTubeStream()">Refresh video</a>
+
+					{# Conteneur pour l'iframe YouTube - centré et élargi #}
+					<div
+						id="youtube-stream" data-vente-id="{{ vente.vente_id }}" data-lot-id="{{ vente.lot_id }}" data-is-admin="{{ is_admin ? '1' : '0' }}" data-user-id="{{ user_authenticated ? user_id : '0' }}" data-youtube-url="{{ vente.youtube_live_url ?? '' }}" style="width: 100%; height: 500px; position: relative; display: flex; justify-content: center; align-items: center;">
+
+						{# iframe YouTube sera injectée ici par JavaScript #}
+						<div id="youtube-loading" style="padding: 20px; text-align: center; color: #666; background: #f8f9fa; border-radius: 8px; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
+							<div>
+								<div style="margin-bottom: 10px;">🎥</div>
+								<div>Chargement du livestream...</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="body-lot body-live">
+		{% set current_lot_to_use = current_lot ?? debug_current_lot %}
+		{% if current_lot_to_use %}
+			<div class="detail-lot-live">
+				<div class="container">
+					<div class="row">
+						<div class="infos-sup-vente">
+							<div class="col-left-live">
+								<div class="estimation">
+									<span>Estimation :</span>
+									<span class="estimation-value">{{ current_lot_to_use.estimation }}</span>
+									<div class="btns-covert">
+										<div class="convert active" data-currency="dh">Dhs</div>
+										<div class="convert" data-currency="eur">€</div>
+									</div>
+								</div>
+								<div class="current-enchere hand">
+									<div class="value-enchere">
+										<span class="label-enchere">Enchère en cours</span>
+										<span class="c-value-enchere" data-dh="{{ current_lot_to_use.enchere_dh }}" data-eur="{{ current_lot_to_use.enchere_eur }}">{{ current_lot_to_use.enchere_dh }}</span>
+										<sub class="currency-symbol">Dhs</sub>
+										{% if current_lot_to_use.user_has_highest_bid %}
+											<span class="hand-icon">Vous avez la main</span>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+							<div class="col-right-live">
+								<div class="pas-enchere">
+									Le pas d'enchère sur ce lot est de :
+									<span class="pas-value" data-dh="{{ pas_enchere|number_format(0, ',', ' ') }} Dhs" data-eur="{{ (pas_enchere * 0.09)|number_format(2, ',', ' ') }} €">{{ pas_enchere|number_format(0, ',', ' ') }}
+										Dhs</span>
+								</div>
+								<div class="next-enchere">
+									<div class="value-enchere">
+										<span class="label-enchere">Enchère suivante</span>
+										<span class="next-value" data-dh="{{ current_lot_to_use.next_enchere_dh }}" data-eur="{{ current_lot_to_use.next_enchere_eur }}">{{ current_lot_to_use.next_enchere_dh }}</span>
+										<sub class="currency-symbol">Dhs</sub>
+									</div>
+									{% if user_authenticated and user_inscrit and not current_lot_to_use.is_adjuged %}
+										<form method="post" action="" style="margin-top: 10px;">
+											<input type="hidden" name="lot_id" value="{{ current_lot_to_use.nid }}">
+											<input type="hidden" name="submit_enchere" value="1">
+											<div class="form-group">
+												<select name="enchere_value" id="enchere_value" class="form-control">
+													{% for proposition in current_lot_to_use.enchere_propositions %}
+														<option value="{{ proposition.value }}">{{ proposition.dh }}</option>
+													{% endfor %}
+												</select>
+											</div>
+											<button type="submit" class="sindentifier" style="margin-top: 5px;">Valider cette enchère</button>
+										</form>
+									{% else %}
+										<a class="sindentifier" href="/user/login">S'identifier pour enchérir</a>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-visu-lot-vente">
+						<div class="slide-ilus">
+							{% if current_lot_to_use.images %}
+								{% for image in current_lot_to_use.images %}
+									<a href="{{ image.url }}"><img src="{{ image.url }}" alt="{{ image.alt }}"></a>
+								{% endfor %}
+							{% else %}
+								<a href="{{ current_lot_to_use.image_url }}"><img src="{{ current_lot_to_use.image_url }}" alt="{{ current_lot_to_use.image_alt }}"></a>
+							{% endif %}
+						</div>
+						<div class="pager-slide-ilus">
+							{% if current_lot_to_use.images %}
+								{% for image in current_lot_to_use.images %}
+									<div class="item-pager"><img src="{{ image.url }}" alt="{{ image.alt }}"></div>
+								{% endfor %}
+							{% else %}
+								<div class="item-pager"><img src="{{ current_lot_to_use.image_url }}" alt="{{ current_lot_to_use.image_alt }}"></div>
+							{% endif %}
+						</div>
+					</div>
+					<div class="col-desc-lot">
+						<div class="nbr-lot">
+							<span>{{ current_lot_to_use.nid }}</span>
+						</div>
+						<div class="name-oeuvre">{{ current_lot_to_use.auteur }}</div>
+						<div class="autheur-oeuvre">{{ current_lot_to_use.title }}</div>
+						<p>{{ current_lot_to_use.description }}</p>
+					</div>
+				</div>
+			</div>
+		{% else %}
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<p style="color: red; font-weight: bold;">Aucun lot disponible pour cette vente en livestream.</p>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+
+	{# Section "Autres lots" inchangée #}
+	<div class="other-lot">
+		<div class="container">
+			<div class="row">
+				<h2>Autres lots de la vente</h2>
+			</div>
+		</div>
+
+		{# LOTS ADJUGÉS #}
+		{% set lots_adjuged_to_use = lots.adjuged is defined ? lots.adjuged : debug_lots_adjuged %}
+		{% if lots_adjuged_to_use is defined and lots_adjuged_to_use is not empty %}
+			{% for lot in lots_adjuged_to_use %}
+				<div class="inner-item-pther">
+					<a class="item-other-lot adjuge-item-lot" href="{{ lot.lien_lot }}">
+						<div class="container">
+							<div class="row">
+								<div class="visu-item-other-lot"><img src="{{ lot.image_url }}" alt="{{ lot.image_alt }}"></div>
+								<div class="desc-item-other-lot">
+									<h4>{{ lot.nid }}
+										-<span>
+											Lot adjugé</span>
+									</h4>
+									<h3>{{ lot.auteur }}
+										<span>{{ lot.title }}</span>
+									</h3>
+								</div>
+								<div class="etimation-other">
+									<p>Estimation du lot n°{{ lot.nid }}
+										:
+										<span class="estimation-value">{{ lot.estimation }}</span>
+									</p>
+									<div class="adjuge">
+										<span class="label-adjuge">Lot adjugé</span>
+										<span class="value-adjuge" data-dh="{{ lot.enchere_dh }}" data-eur="{{ lot.enchere_eur }}">{{ lot.enchere_dh }}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+
+		{# LOTS EN COURS #}
+		{% set lots_en_cours_to_use = lots.en_cours is defined ? lots.en_cours : debug_lots_en_cours %}
+		{% if lots_en_cours_to_use is defined and lots_en_cours_to_use is not empty %}
+			{% for lot in lots_en_cours_to_use %}
+				<div class="inner-item-pther">
+					<a class="item-other-lot current-item-lot {{ loop.first ? 'active' : '' }}" href="{{ lot.lien_lot }}">
+						<div class="container">
+							<div class="row">
+								<div class="visu-item-other-lot"><img src="{{ lot.image_url }}" alt="{{ lot.image_alt }}"></div>
+								<div class="desc-item-other-lot">
+									<h4>{{ lot.nid }}
+										-<span>
+											Actuellement aux enchères</span>
+									</h4>
+									<h3>{{ lot.auteur }}
+										<span>{{ lot.title }}</span>
+									</h3>
+								</div>
+								<div class="etimation-other">
+									<p>Estimation du lot n°{{ lot.nid }}
+										:
+										<span class="estimation-value">{{ lot.estimation }}</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					<div class="item-other-lot ntbr-item-lot" id="dto{{ loop.index }}">
+						<div class="container">
+							<div class="row">
+								<div class="visu-item-other-lot">
+									{% if lot.images %}
+										{% for image in lot.images %}
+											<img src="{{ image.url }}" alt="{{ image.alt }}">
+										{% endfor %}
+									{% else %}
+										<img src="{{ lot.image_url }}" alt="{{ lot.image_alt }}">
+									{% endif %}
+								</div>
+								<div class="desc-item-other-lot">
+									<h4>{{ lot.nid }}</h4>
+									<h3>{{ lot.auteur }}
+										<span>{{ lot.title }}</span>
+									</h3>
+									<p>{{ lot.description }}</p>
+									<ul>
+										{% if lot.details %}
+											{% for detail in lot.details %}
+												<li>{{ detail }}</li>
+											{% endfor %}
+										{% endif %}
+									</ul>
+								</div>
+								<div class="etimation-other">
+									<p>Estimation du lot n°{{ lot.nid }}
+										:
+										<span class="estimation-value">{{ lot.estimation }}</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+
+		{# Message final si aucun lot #}
+		{% if (lots_adjuged_to_use is not defined or lots_adjuged_to_use is empty) and (lots_en_cours_to_use is not defined or lots_en_cours_to_use is empty) %}
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<p style="color: red; font-weight: bold;">Aucun autre lot disponible pour cette vente.</p>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</main>

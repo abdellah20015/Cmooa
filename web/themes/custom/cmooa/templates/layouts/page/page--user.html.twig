@@ -1,0 +1,285 @@
+{% if page.header %}
+  {{ page.header }}
+{% endif %}
+
+{#
+/**
+ * @file
+ * Template pour la page utilisateur (espace client).
+ */
+#}
+
+{# Messages d'alerte #}
+{# Messages d'alerte via meta tags #}
+{% if message_type and message_text %}
+  <meta name="message-type" content="{{ message_type }}">
+  <meta name="message-text" content="{{ message_text }}">
+{% endif %}
+
+<main id="main" role="main">
+<div class="head-espace-client">
+  <div class="user-header">
+    <div class="user-info">
+      <p>Bienvenue sur votre espace client</p>
+      <h1>{{ user_data.username }}</h1>
+    </div>
+    <div class="user-actions">
+      <a href="{{ logout_url }}" class="btn-logout" title="Se déconnecter">
+        <svg class="logout-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Déconnexion</span>
+      </a>
+    </div>
+  </div>
+  <ul class="menu-client">
+    <li><a class="active" href="#informations">Mes informations</a></li>
+    <li><a href="#offres">Mes offres</a></li>
+    <li><a href="#favoris">Mes favoris</a></li>
+    <li><a href="#ventes">Meilleures ventes</a></li>
+    <li><a href="">Résultat des ventes</a></li>
+    <li><a href="">Vendre un bien</a></li>
+  </ul>
+</div>
+
+<div class="body-espace-client">
+  <div class="inner-tabs" id="informations">
+    <div class="container">
+      <div class="row">
+        <h2>Mes informations</h2>
+        <a class="edit-infos" href="" onclick="toggleEditMode(); return false;">Modifier mes informations</a>
+      </div>
+      <div class="row">
+        <div class="body-contact">
+          <div class="form-contact">
+            <form action="" method="post" id="user-info-form">
+              <div class="row-form">
+                <div class="col-form">
+                  <label for="civilite">Civilité <span>*</span></label>
+                  <input type="text" name="civilite" id="civilite" placeholder="Mr" value="{{ user_data.civilite }}" readonly>
+                </div>
+                <div class="col-form">
+                  <label for="nom">Nom <span>*</span></label>
+                  <input type="text" name="nom" id="nom" placeholder="-" value="{{ user_data.nom }}" readonly>
+                </div>
+                <div class="col-form">
+                  <label for="prenom">Prénom <span>*</span></label>
+                  <input type="text" name="prenom" id="prenom" placeholder="-" value="{{ user_data.prenom }}" readonly>
+                </div>
+              </div>
+              <div class="row-form">
+                <div class="col-form3">
+                  <label for="adresse">Adresse <span>*</span></label>
+                  <input type="text" name="adresse" id="adresse" placeholder="-" value="{{ user_data.adresse }}" readonly>
+                </div>
+              </div>
+              <div class="row-form">
+                <div class="col-form">
+                  <label for="cpt">Code postal <span>*</span></label>
+                  <input type="text" name="cpt" id="cpt" placeholder="-" value="{{ user_data.cpt }}" readonly>
+                </div>
+                <div class="col-form">
+                  <label for="ville">ville <span>*</span></label>
+                  <input type="text" name="ville" id="ville" placeholder="-" value="{{ user_data.ville }}" readonly>
+                </div>
+              </div>
+              <div class="row-form">
+                <div class="col-form">
+                  <label for="tel">Téléphone <span>*</span></label>
+                  <input type="text" name="tel" id="tel" placeholder="-" value="{{ user_data.tel }}" readonly>
+                </div>
+                <div class="col-form">
+                  <label for="email">Email <span>*</span></label>
+                  <input type="text" name="email" id="email" placeholder="-" value="{{ user_data.email }}" readonly>
+                </div>
+                <div class="col-form">
+                  <label for="fax">Fax <span>*</span></label>
+                  <input type="text" name="fax" id="fax" placeholder="-" value="{{ user_data.fax }}" readonly>
+                </div>
+              </div>
+              <div class="row-form">
+                <div class="col-form2">
+                  <label for="rib">Références bancaires (RIB ou IBAN) <span>*</span></label>
+                  <input type="text" name="rib" id="rib" placeholder="-" value="{{ user_data.rib }}" readonly>
+                </div>
+                <div class="col-form">
+                  <label for="namebanque">Nom de la banque <span>*</span></label>
+                  <input type="text" name="namebanque" id="namebanque" placeholder="-" value="{{ user_data.namebanque }}" readonly>
+                </div>
+              </div>
+              <div class="row-form">
+                <div class="col-form3">
+                  <label for="adresse2">Adresse de la banque <span>*</span></label>
+                  <input type="text" name="adresse2" id="adresse2" placeholder="-" value="{{ user_data.adresse2 }}" readonly>
+                </div>
+              </div>
+              <div class="row-form">
+                <div class="col-form3">
+                  <label class="container-label"> En envoyant ces informations, vous acceptez les <a href="" title="">conditions d'utilisation</a> de ce site
+                    <input type="checkbox" name="conditions" {{ user_data.conditions ? 'checked' : '' }} disabled>
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row-form" id="submit-row" style="display: none;">
+                <div class="col-action">
+                  <input type="submit" name="update_user_info" value="Envoyer">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <h2>Modifier mon mot de passe</h2>
+      </div>
+      <div class="row">
+        <div class="body-contact">
+          <div class="form-contact">
+            <form class="change-psss" action="" method="post">
+              <div class="row-form">
+                <div class="col-form">
+                  <label for="old-pass">Ancien mot de passe <span>*</span></label>
+                  <input type="password" name="old-pass" id="old-pass" required>
+                </div>
+              </div>
+              <div class="row-form">
+                <div class="col-form">
+                  <label for="new-pass">Nouveau mot de passe <span>*</span></label>
+                  <input type="password" name="new-pass" id="new-pass" required>
+                </div>
+                <div class="col-form">
+                  <label for="conf-pass">Confirmer mot de passe <span>*</span></label>
+                  <input type="password" name="conf-pass" id="conf-pass" required>
+                </div>
+              </div>
+              <div class="row-form">
+                <div class="col-form">
+                  <input type="submit" name="change_password" value="Changer mot de passe">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-espace-client" style="margin-top:-10%">
+    <div class="inner-tabs" id="offres">
+        <div class="container">
+            <div class="row">
+                <h2>Mes offres</h2>
+            </div>
+            <div class="row">
+                <div class="accordion">
+                    {% for vente in user_ventes %}
+                        <div class="item">
+                            <a class="acc-heading" href="#acc{{ vente.vente_id }}">
+                                <img src="{{ vente.vente_image }}" alt="">
+                                <p><span>{{ vente.vente_status }} / n° {{ vente.vente_id }}</span> {{ vente.vente_title }}</p>
+                            </a>
+                            <div class="acc-content" id="acc{{ vente.vente_id }}">
+                                <div class="inner">
+                                    {% for lot in vente.lots %}
+                                        <div class="item-offre">
+                                            <div class="col-visu">
+                                                <div class="visu-offre"><img src="{{ lot.image_url }}" alt=""></div>
+                                                <p>
+                                                    <span class="name">{{ lot.auteur }}</span>
+                                                    <span class="title">{{ lot.title }}</span>
+                                                    <span class="prix">{{ lot.estimation }}</span>
+                                                </p>
+                                            </div>
+                                            <div class="col-desc">
+                                                <ul>
+                                                    {% for enchere in lot.encheres %}
+                                                        <li>
+                                                            <span class="offre-lot-prix">{{ enchere.prix }}</span>
+                                                            <span class="offre-lot-date">{{ enchere.date }}</span>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="inner-tabs" id="favoris" style="margin-top:-6%">
+    <div class="container">
+      <div class="row">
+        <h2>Mes favoris</h2>
+      </div>
+      <div class="row">
+        <div class="liste-favoris">
+          {% for favori in user_favoris %}
+          <div class="item-favoris">
+            <div class="visu-favoris"><img src="{{ favori.image_url }}" alt=""></div>
+            <div class="desc-favoris">
+              <div class="vng-favoris">
+                <img src="{{ favori.vente_image }}" alt="">
+                <p>{{ favori.vente_status }} / n° {{ favori.vente_id }} {{ favori.vente_title }}</p>
+              </div>
+              <div class="detail-desc">
+                <span class="nmr">{{ favori.lot_numero }}</span>
+                <p>{{ favori.auteur }} <span>{{ favori.title }}</span></p>
+                <span class="prix-favoris">{{ favori.estimation }}</span>
+                <div class="hover"><a href="/lot/{{ favori.lot_id }}">Voir le détail</a></div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="inner-tabs" id="ventes" style="margin-top: -6%">
+    <div class="container">
+      <div class="row">
+        <h2>Meilleures ventes</h2>
+      </div>
+      <div class="row">
+        <div class="liste-favoris">
+          {% for vente in meilleures_ventes %}
+          <div class="item-favoris">
+            <div class="visu-favoris"><img src="{{ vente.image_url }}" alt=""></div>
+            <div class="desc-favoris">
+              <div class="vng-favoris">
+                <img src="{{ vente.vente_image }}" alt="">
+                <p>{{ vente.vente_status }} / n° {{ vente.vente_id }} {{ vente.vente_title }}</p>
+              </div>
+              <div class="detail-desc">
+                <span class="nmr">{{ vente.lot_numero }}</span>
+                <p>{{ vente.auteur }} <span>{{ vente.title }}</span></p>
+                <span class="prix-favoris">{{ vente.estimation }}</span>
+                <span class="adjuge-favoris">Adjugé : <span>{{ vente.prix_adjuge }}</span></span>
+                <div class="hover"><a href="/lot/{{ vente.lot_id }}">Voir le détail</a></div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+
+{% if page.footer %}
+  <footer class="footer">
+    {{ page.footer }}
+  </footer>
+{% endif %}

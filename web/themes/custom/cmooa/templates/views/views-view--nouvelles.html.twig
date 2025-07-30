@@ -1,0 +1,41 @@
+<div class="banner-propos hasfnd">
+	<img src="themes/custom/cmooa/medias/images/img-a-propos.jpg" alt="">
+	<div class="container">
+		<div class="row">
+			<div class="head-propos">
+				<h1>{{ view.getTitle() }}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="body-apropos">
+	<div class="container">
+		<div class="row">
+			<div class="row">
+				<div class="filtre">
+					{% if exposed %}
+						{{ exposed }}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row list-nouvelle">
+			{% for row in rows %}
+				<a class="item-nouvelle" href="{{ row.lien }}">
+					<div class="visu-nouvelle">
+						<img src="{{ row.image_url }}" alt="{{ row.title }}">
+					</div>
+					<div class="desc-nouvelle">
+						<h4>{{ row.categorie_date }}</h4>
+						<p>{{ row.title }}</p>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+		<div class="row row-more">
+			{{ pager }}
+		</div>
+	</div>
+</div>

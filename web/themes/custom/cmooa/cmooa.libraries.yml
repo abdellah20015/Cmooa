@@ -1,0 +1,38 @@
+global-styling:
+  version: 1.x
+  css:
+    theme:
+      assets/stylesheets/local/bootstrap/bootstrap-reboot.css: {}
+      assets/stylesheets/local/bootstrap/bootstrap-grid.css: {}
+      assets/stylesheets/local/bootstrap/bootstrap.css: {}
+
+      assets/stylesheets/vendor/magnific-popup.css: {}
+      assets/stylesheets/vendor/jquery.fancybox.min.css: {}
+
+      assets/stylesheets/local/modules/slick.css: {}
+
+      assets/stylesheets/local/ckeditor.css: {}
+      assets/stylesheets/local/styles.css: {}
+      https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css: { type: external }
+
+  js:
+    assets/scripts/jquery-3.4.1.min.js: {}
+    assets/scripts/jquery.mousewheel.js: {}
+    assets/scripts/jquery.fancybox.min.js: {}
+    assets/scripts/vendors.js: {}
+    assets/scripts/vendors.min.js: {}
+
+    assets/scripts/scripts.js: {}
+    assets/scripts/lot-favoris.js: {}
+    assets/scripts/lot-currency.js: {}
+    assets/scripts/user-page.js: {}
+    assets/scripts/livestream.js: {}
+    https://cdn.jsdelivr.net/npm/sweetalert2@11: { type: external }
+
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupalSettings
+    - core/jquery.once
+    - core/drupal.ajax
+    - core/jquery.form

@@ -1,0 +1,330 @@
+<?php
+
+/**
+ * @file
+ * Installation du module forms.
+ */
+
+/**
+ * Implémente hook_schema().
+ */
+function forms_schema() {
+  $schema['forms_contact_submissions'] = [
+    'description' => 'Stocke les soumissions du formulaire de contact.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Identifiant unique de la soumission.',
+      ],
+      'nom' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Nom de l\'utilisateur.',
+      ],
+      'prenom' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Prénom de l\'utilisateur.',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Adresse email de l\'utilisateur.',
+      ],
+      'telephone' => [
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => FALSE,
+        'description' => 'Numéro de téléphone de l\'utilisateur.',
+      ],
+      'sujet' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Sujet de la soumission (terme de taxonomie).',
+      ],
+      'message' => [
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Message de l\'utilisateur.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Timestamp de la soumission.',
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  $schema['forms_inscription_submissions'] = [
+    'description' => 'Stocke les soumissions du formulaire d\'inscription.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Identifiant unique de la soumission.',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => 'Identifiant de l\'utilisateur connecté.',
+      ],
+      'lot_id' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => 'Identifiant du lot associé.',
+      ],
+      'civilite' => [
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => FALSE,
+        'description' => 'Civilité de l\'utilisateur.',
+      ],
+      'nom' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Nom de l\'utilisateur.',
+      ],
+      'prenom' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Prénom de l\'utilisateur.',
+      ],
+      'adresse' => [
+        'type' => 'varchar',
+        'length' => 500,
+        'not null' => TRUE,
+        'description' => 'Adresse de l\'utilisateur.',
+      ],
+      'cpt' => [
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => FALSE,
+        'description' => 'Code postal de l\'utilisateur.',
+      ],
+      'ville' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Ville de l\'utilisateur.',
+      ],
+      'tel' => [
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+        'description' => 'Téléphone de l\'utilisateur.',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Adresse email de l\'utilisateur.',
+      ],
+      'fax' => [
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => FALSE,
+        'description' => 'Fax de l\'utilisateur.',
+      ],
+      'rib' => [
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+        'description' => 'RIB/IBAN de l\'utilisateur.',
+      ],
+      'namebanque' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Nom de la banque.',
+      ],
+      'adresse2' => [
+        'type' => 'varchar',
+        'length' => 500,
+        'not null' => TRUE,
+        'description' => 'Adresse de la banque.',
+      ],
+      'conditions' => [
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Acceptation des conditions d\'utilisation.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Timestamp de la soumission.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'uid' => ['uid'],
+      'lot_id' => ['lot_id'],
+    ],
+  ];
+
+  $schema['lot_encheres'] = [
+    'description' => 'Table pour stocker les enchères sur les lots.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'ID primaire de l\'enchère.',
+      ],
+      'lot_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'ID du lot associé.',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'ID de l\'utilisateur ayant fait l\'enchère.',
+      ],
+      'enchere' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Montant de l\'enchère en DH.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+        'description' => 'Timestamp de création de l\'enchère.',
+      ],
+      'is_adjuged' => [
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Indique si le lot est adjugé (1 = oui, 0 = non).',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'lot_id' => ['lot_id'],
+      'uid' => ['uid'],
+    ],
+  ];
+
+  $schema['vente_inscription'] = [
+    'description' => 'Stocke les relations entre inscriptions et ventes.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Identifiant unique de la relation.',
+      ],
+      'inscription_id' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Identifiant de l\'inscription.',
+      ],
+      'vente_id' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Identifiant de la vente.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'inscription_id' => ['inscription_id'],
+      'vente_id' => ['vente_id'],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Ajoute la table forms_inscription_submissions.
+ */
+function forms_update_8001() {
+  $schema = forms_schema();
+  \Drupal::database()->schema()->createTable('forms_inscription_submissions', $schema['forms_inscription_submissions']);
+}
+
+/**
+ * Ajoute la table lot_encheres.
+ */
+function forms_update_8002() {
+  $schema = forms_schema();
+  \Drupal::database()->schema()->createTable('lot_encheres', $schema['lot_encheres']);
+}
+
+/**
+ * Ajoute la table vente_inscription.
+ */
+function forms_update_8003() {
+  $schema = forms_schema();
+  \Drupal::database()->schema()->createTable('vente_inscription', $schema['vente_inscription']);
+}
+
+/**
+ * Ajoute le champ uid à la table forms_inscription_submissions.
+ */
+function forms_update_8004() {
+  $database = \Drupal::database();
+  if ($database->schema()->tableExists('forms_inscription_submissions')) {
+    if (!$database->schema()->fieldExists('forms_inscription_submissions', 'uid')) {
+      $database->schema()->addField('forms_inscription_submissions', 'uid', [
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => 'Identifiant de l\'utilisateur connecté.',
+      ]);
+    }
+    if (!$database->schema()->indexExists('forms_inscription_submissions', 'uid')) {
+      $database->schema()->addIndex('forms_inscription_submissions', 'uid', ['uid'], []);
+    }
+  }
+}
+
+/**
+ * Ajoute le champ lot_id à la table forms_inscription_submissions.
+ */
+function forms_update_8005() {
+  $database = \Drupal::database();
+  if ($database->schema()->tableExists('forms_inscription_submissions')) {
+    if (!$database->schema()->fieldExists('forms_inscription_submissions', 'lot_id')) {
+      $database->schema()->addField('forms_inscription_submissions', 'lot_id', [
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => 'Identifiant du lot associé.',
+      ]);
+    }
+    if (!$database->schema()->indexExists('forms_inscription_submissions', 'lot_id')) {
+      $database->schema()->addIndex('forms_inscription_submissions', 'lot_id', ['lot_id'], []);
+    }
+  }
+}
+
+/**
+ * Ajoute le champ is_adjuged à la table lot_encheres.
+ */
+function forms_update_8006() {
+  $database = \Drupal::database();
+  if ($database->schema()->tableExists('lot_encheres')) {
+    if (!$database->schema()->fieldExists('lot_encheres', 'is_adjuged')) {
+      $database->schema()->addField('lot_encheres', 'is_adjuged', [
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Indique si le lot est adjugé (1 = oui, 0 = non).',
+      ]);
+    }
+  }
+}

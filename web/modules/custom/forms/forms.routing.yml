@@ -1,0 +1,11 @@
+forms_inscription_form:
+  path: '/inscription/{vente_id}/{lot_id}'
+  defaults:
+    _form: '\Drupal\forms\Form\InscriptionForm'
+    _title: 'Formulaire d''inscription'
+    vente_id: null
+    lot_id: null
+  requirements:
+    _permission: 'access content'
+    vente_id: '\d+'
+    lot_id: '\d+'

@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Template pour les pages livestream
+ */
+#}
+{% if page.header %}
+  {{ page.header }}
+{% endif %}
+
+{# Template spécifique pour livestream #}
+{% include 'node--livestream--full.html.twig' %}
+
+{% if page.footer %}
+  <footer class="footer">
+    {{ page.footer }}
+  </footer>
+{% endif %}

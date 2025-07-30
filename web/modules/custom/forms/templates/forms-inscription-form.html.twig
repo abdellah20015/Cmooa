@@ -1,0 +1,131 @@
+<div class="body-contact">
+  <div class="form-contact">
+    <div class="head-inscription">
+      <h2>Inscription</h2>
+      <p>Si vous souhaitez vous inscrire, merci de bien vouloir renseigner le formulaire ci-dessous. <br />Un identifiant et un mot de passe vous seront transmis sur votre adresse mail.</p>
+    </div>
+    <form action="" method="post" id="forms-inscription-form" accept-charset="UTF-8">
+      <div class="row-form">
+        <div class="col-form">
+          <label for="civilite"></label>
+          {{ form.civilite|without('title') }}
+        </div>
+        <div class="col-form">
+          <label for="nom"><span>*</span></label>
+          {{ form.nom|without('title') }}
+        </div>
+        <div class="col-form">
+          <label for="prenom"><span>*</span></label>
+          {{ form.prenom|without('title') }}
+        </div>
+      </div>
+      <div class="row-form">
+        <div class="col-form3">
+          <label for="adresse"><span>*</span></label>
+          {{ form.adresse|without('title') }}
+        </div>
+      </div>
+      <div class="row-form">
+        <div class="col-form">
+          <label for="cpt"></label>
+          {{ form.cpt|without('title') }}
+        </div>
+        <div class="col-form">
+          <label for="ville"><span>*</span></label>
+          {{ form.ville|without('title') }}
+        </div>
+      </div>
+      <div class="row-form">
+        <div class="col-form">
+          <label for="tel"><span>*</span></label>
+          {{ form.tel|without('title') }}
+        </div>
+        <div class="col-form">
+          <label for="email"><span>*</span></label>
+          {{ form.email|without('title') }}
+        </div>
+        <div class="col-form">
+          <label for="fax"></label>
+          {{ form.fax|without('title') }}
+        </div>
+      </div>
+      <div class="row-form">
+        <div class="col-form2">
+          <label for="rib"><span>*</span></label>
+          {{ form.rib|without('title') }}
+        </div>
+        <div class="col-form">
+          <label for="namebanque"><span>*</span></label>
+          {{ form.namebanque|without('title') }}
+        </div>
+      </div>
+      <div class="row-form">
+        <div class="col-form3">
+          <label for="adresse2"><span>*</span></label>
+          {{ form.adresse2|without('title') }}
+        </div>
+      </div>
+      <div class="row-form">
+        <div class="col-form3">
+            {{ form.conditions|without('title') }}
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row-form">
+        <div class="col-action">
+          <div class="msg-error" id="form-error-message"></div>
+          {{ form.actions.submit }}
+        </div>
+      </div>
+      {{ form.form_build_id }}
+      {{ form.form_token }}
+      {{ form.form_id }}
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Vérifier s'il y a des messages dans drupalSettings
+    if (typeof drupalSettings !== 'undefined' && drupalSettings.forms) {
+      if (drupalSettings.forms.success_message) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Succès',
+          text: drupalSettings.forms.success_message,
+          confirmButtonText: 'OK'
+        });
+      }
+
+      if (drupalSettings.forms.error_message) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: drupalSettings.forms.error_message,
+          confirmButtonText: 'OK'
+        });
+      }
+    }
+
+    const form = document.querySelector('form#forms-inscription-form');
+    if (!form || form.classList.contains('processed')) return;
+    form.classList.add('processed');
+
+    form.addEventListener('submit', function (event) {
+      // Vérifier s'il y a des erreurs de validation
+      const errors = form.querySelectorAll('.form-item--error-message, .messages--error');
+
+      if (errors.length > 0) {
+        event.preventDefault();
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Veuillez corriger les erreurs dans le formulaire.',
+          confirmButtonText: 'OK'
+        });
+      }
+      // Si pas d'erreurs, laisser le formulaire se soumettre normalement
+    });
+  });
+</script>

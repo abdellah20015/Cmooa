@@ -1,0 +1,16 @@
+<div class="home-galerie">
+  <div class="container">
+    <div class="row">
+      <div class="slide-galerie-home">
+        {% for item in elements_galerie %}
+          <a class="item-galerie-home" href="{{ item.lien.url }}">
+            <div class="visu-galerie">
+              <img src="{{ item.thumbnail }}" alt="{{ item.alt }}">
+            </div>
+            <p>{{ item.description }}</p>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

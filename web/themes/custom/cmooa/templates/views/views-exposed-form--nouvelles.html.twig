@@ -1,0 +1,16 @@
+<form{{ attributes }}>
+  <div class="row-filtre">
+    <div class="item-filtre">
+      {% for key, element in form %}
+        {% if key starts with 'field_' and element['#type'] == 'select' %}
+          {% set element = element|merge({'#attributes': {'class': ['form-select']}}) %}
+          {{ element }}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {# Cacher le bouton submit mais le garder pour le fonctionnement #}
+  <div style="display: none;">
+    {{ form.actions }}
+  </div>
+</form>

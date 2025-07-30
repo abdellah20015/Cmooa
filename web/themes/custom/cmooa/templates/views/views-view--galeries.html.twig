@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Template pour la vue des galeries - Page complète.
+ *
+ * Variables disponibles :
+ * - rows : Tableau des données des ventes avec images et vidéos
+ * - view : L'objet vue
+ * - title : Le titre de la vue
+ */
+#}
+
+<div class="banner-propos hasfnd">
+  <img src="themes/custom/cmooa/medias/images/img-a-propos.jpg" alt="">
+  <div class="container">
+    <div class="row">
+      <div class="head-propos">
+        <h1>{{ view.getTitle() }}</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-apropos">
+  <div class="container">
+    <div class="row list-galerie">
+      {% for row in rows %}
+        <a class="item-galerie" href="{{ row.lien_galerie }}">
+          <div class="visu-galerie">
+            <img src="{{ row.image_url }}" alt="{{ row.title }}">
+          </div>
+          <div class="desc-galerie">
+            <div class="vente-nbr">{{ row.vente_numero }}</div>
+            <div class="name-galrie">{{ row.title }}</div>
+            {% if row.nbr_images > 0 %}
+              <span class="nbr-img">{{ row.nbr_images }} image{{ row.nbr_images > 1 ? 's' : '' }}</span>
+            {% endif %}
+            {% if row.nbr_videos > 0 %}
+              <span class="nbr-video">{{ row.nbr_videos|length > 1 ? '%02d'|format(row.nbr_videos) : row.nbr_videos }} vidéo{{ row.nbr_videos > 1 ? 's' : '' }}</span>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    {{ pager }}
+  </div>
+</div>

@@ -1,0 +1,116 @@
+{#
+/**
+ * @file
+ * Template pour la région header
+ */
+#}
+<header class="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="navigation">
+          {# Logo dynamique #}
+          <div class="logo">
+            <a href="{{ path('<front>') }}">
+              <img src="{{ logo_url }}" alt="{{ site_name }}">
+            </a>
+          </div>
+
+          {# Bouton menu mobile #}
+          <div class="btn-menu">
+            <span></span>
+            <span></span>
+          </div>
+
+          {# Menu interne #}
+          <div class="inner-menu">
+            <div class="content-menu">
+              {# Réseaux sociaux mobile #}
+              <div class="rs-mobile">
+                {% if user_info.is_logged_in %}
+                  <a class="idt-mobile" href="{{ user_info.profile_url }}">{{ user_info.username }}</a>
+                {% else %}
+                  <a class="idt-mobile" href="{{ user_login_url }}">s'identifier</a>
+                {% endif %}
+                {% if social_menu %}
+                  <ul>
+                    {% for item in social_menu %}
+                      <li>
+                        <a class="{{ item.class }}" href="{{ item.url }}" target="_blank">
+                          <span class="{{ item.icon }}"></span>
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+
+              {# Menu principal #}
+              {% if main_menu %}
+                <ul class="nav">
+                  {% for item in main_menu %}
+                    <li>
+                      <a class="{{ item.active ? 'active' : '' }}" href="{{ item.url }}">
+                        {{ item.title }}
+                      </a>
+                      {% if item.children %}
+                        <ul class="sub-menu">
+                          {% for child in item.children %}
+                            <li>
+                              <a href="{{ child.url }}">{{ child.title }}</a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+
+              {# Menu secondaire #}
+              {% if secondary_menu %}
+                <div class="menu-sup">
+                  <ul>
+                    {% for item in secondary_menu %}
+                      <li>
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          {# Menu des icônes #}
+          <div class="menu-src">
+            <ul>
+              <li><a class="search" href="{{ search_url }}"></a></li>
+              <li class="connextion{{ user_info.is_logged_in ? ' active' : '' }}">
+                {% if user_info.is_logged_in %}
+                  <a href="{{ user_info.profile_url }}">
+                    <span class="ico-conn"></span>
+                    <span class="label-conn">{{ user_info.username }}</span>
+                  </a>
+                {% else %}
+                  <a href="{{ user_login_url }}">
+                    <span class="ico-conn"></span>
+                  </a>
+                {% endif %}
+              </li>
+              {% if social_menu %}
+                {% for item in social_menu %}
+                  <li>
+                    <a class="{{ item.class }}" href="{{ item.url }}" target="_blank">
+                      <span class="{{ item.icon }}"></span>
+                    </a>
+                  </li>
+                {% endfor %}
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

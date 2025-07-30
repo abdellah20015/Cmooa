@@ -1,0 +1,43 @@
+<div class="oeuvres-main">
+  <div class="container">
+    <div class="row">
+      <div class="title-section title-calender">
+        <h2>{{ view.getTitle() }}</h2>
+        <div class="wrrap-arrow">
+          <div class="arrow-prev prev-02"></div>
+          <div class="arrow-next next-02"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="slide-main slider-calendrier">
+        {% for row in rows %}
+          <div class="item-slide-main">
+            <div class="timeline">
+              {% if row.statut_label %}
+                <span>{{ row.statut_label }}</span>
+              {% endif %}
+            </div>
+            <div class="visu-slide">
+              <img src="{{ row.image_url }}" alt="{{ row.title }}">
+            </div>
+            <div class="date-calendrier">
+              <p>{{ row.date_calendrier|raw }}</p>
+            </div>
+            <div class="desc-slide">
+              <p><span>Vente n° {{ row.nid }}</span> {{ row.description }}</p>
+              {% if row.is_livestream %}
+                <span class="tags on-livestream">Livestream</span>
+              {% endif %}
+              {% if row.show_button %}
+                <a href="/inscription/{{ row.nid }}">S'inscrire sur la vente</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

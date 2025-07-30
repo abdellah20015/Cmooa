@@ -1,0 +1,34 @@
+<div class="oeuvres-main">
+  <div class="container">
+    <div class="row">
+      <div class="title-section">
+        {% if vente %}
+          <a class="vng-title" href="/node/{{ vente.node_id }}">
+            <img src="{{ vente.image_url }}" alt="{{ vente.title }}">
+            <p>Vente en cours / n° {{ vente.nid }} {{ vente.title }} <span>{{ vente.date_label }}</span></p>
+          </a>
+        {% endif %}
+        <h2>{{ view.getTitle() }}</h2>
+        <div class="wrrap-arrow">
+          <div class="arrow-prev prev-01"></div>
+          <div class="arrow-next next-01"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="slide-main slide-majeurs">
+        {% for row in rows %}
+          <div class="item-slide-main">
+            <div class="visu-slide"><img src="{{ row.image_url }}" alt="{{ row.title }}"></div>
+            <div class="desc-slide">
+              <p>{{ row.auteur }}</p><span class="title-oeuvre">{{ row.title }}</span><span class="prix-oeuvre">{{ row.estimation }}</span><span class="enchere-oeuvre">Enchère : <span class="prix-enchere">{{ row.enchere }}</span></span>
+              <div class="hover"><a href="{{ row.lien_lot }}">Voir le détail du lot</a><span class="hart"></span></div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

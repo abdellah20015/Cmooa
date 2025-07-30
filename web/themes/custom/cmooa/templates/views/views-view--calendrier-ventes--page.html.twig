@@ -1,0 +1,94 @@
+<div class="calendrier-ventes">
+  <div class="head-calendrier">
+    <h1>{{ view.getTitle() }}</h1>
+  </div>
+  <div class="list-calendrier">
+    <div class="container">
+      <div class="row">
+        <div class="tabs-calender">
+          <ul>
+            <li><a class="active" href="#curent-vente">Vente en cours</a></li>
+            <li><a href="#next-vente">Prochaine vente</a></li>
+          </ul>
+          <div class="search-vente">
+            {{ exposed }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="liste-sliders">
+      <div class="container">
+        <div class="row">
+          <div class="slide-calender" id="curent-vente">
+            {% for row in rows %}
+              {% if row.statut == 'en_cours' %}
+                <div class="item-vente-calender">
+                  <div class="visu-vente-calender">
+                    <img src="{{ row.image_url }}" alt="{{ row.title }}">
+                  </div>
+                  <div class="desc-vente-calender">
+                    <span>Vente en cours - Vente n° {{ row.nid }}</span>
+                    <p>{{ row.title }}</p>
+                    <span>{{ row.date_calendrier|raw }}{% if row.is_livestream %} <span>{{ row.lieu }}</span>{% endif %}</span>
+                    {% if row.show_button %}
+                      <a href="{{ row.lien.url }}">{{ row.button_text }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="slide-calender" id="next-vente" style="display:none">
+            {% for row in rows %}
+              {% if row.statut == 'futur' %}
+                <div class="item-vente-calender">
+                  <div class="visu-vente-calender">
+                    <img src="{{ row.image_url }}" alt="{{ row.title }}">
+                  </div>
+                  <div class="desc-vente-calender">
+                    <span>Prochaine vente - Vente n° {{ row.nid }}</span>
+                    <p>{{ row.title }}</p>
+                    <span>{{ row.date_calendrier|raw }}{% if row.is_livestream %} <span>{{ row.lieu }}</span>{% endif %}</span>
+                    {% if row.show_button %}
+                      <a href="{{ row.lien.url }}">{{ row.button_text }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="old-ventes">
+    <div class="container">
+      <div class="row">
+        <h3>Ventes passées</h3>
+      </div>
+      <div class="row">
+        <div class="slide-main slider-calendrier">
+          {% for row in rows %}
+            {% if row.statut == 'passe' %}
+              <div class="item-slide-main">
+                <div class="visu-slide">
+                  <img src="{{ row.image_url }}" alt="{{ row.title }}">
+                </div>
+                <div class="date-calendrier">
+                  <p>{{ row.date_calendrier|raw }}</p>
+                </div>
+                <div class="desc-slide">
+                  <p><span>Vente n° {{ row.nid }}</span> {{ row.title }}</p>
+                  {% if row.is_livestream %}
+                    <span class="tags on-livestream">{{ row.lieu }}</span>
+                  {% endif %}
+                  {# Pas de bouton pour les ventes passées #}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

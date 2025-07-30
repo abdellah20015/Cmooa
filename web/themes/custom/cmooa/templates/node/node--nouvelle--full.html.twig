@@ -1,0 +1,19 @@
+<div class="detail-nouvelle">
+  <div class="date-nouvel">{{ categorie_date }}</div>
+  <h1>{{ title }}</h1>
+  <img src="{{ image_url }}" alt="{{ title }}">
+    {{ description|raw }}
+  <div class="partage-nouvelle">
+    <div class="label-partage-nouvle">Partager</div>
+    <div class="link-rsc">
+      <a href="https://www.facebook.com/cmooaauctionhouse"><span class="icon-facebook"></span></a>
+      <a href="https://www.instagram.com/cmooaauctionhouse"><span class="icon-instagram"></span></a>
+    </div>
+  </div>
+ {% if next_nouvelle is defined and next_nouvelle %}
+  <div class="next-nouvel">
+    <div class="label-next-nouvelle">Actualité suivante</div>
+    <a class="title-next-nouvelle" href="{{ next_nouvelle.lien }}">{{ next_nouvelle.title }}</a>
+  </div>
+{% endif %}
+</div>

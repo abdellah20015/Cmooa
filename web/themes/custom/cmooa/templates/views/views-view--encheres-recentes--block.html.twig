@@ -1,0 +1,32 @@
+<div class="oeuvres-main">
+  <div class="container">
+    <div class="row">
+      <div class="title-section title-encheres-recentes">
+        <h2>{{ view.getTitle() }}</h2>
+        <div class="wrrap-arrow">
+          <div class="arrow-prev prev-03"></div>
+          <div class="arrow-next next-03"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="slide-main slider-encheres">
+        {% for row in rows %}
+          <div class="item-slide-main">
+            <div class="visu-slide">
+              <img src="{{ row.image_url }}" alt="{{ row.title }}">
+            </div>
+            <div class="desc-slide">
+              <p>{{ row.auteur }}</p>
+              <span class="title-oeuvre">{{ row.title }}</span>
+              <span class="prix-oeuvre">{{ row.estimation }}</span>
+              <span class="enchere-oeuvre">Enchère : <span class="prix-enchere">{{ row.enchere }}</span></span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

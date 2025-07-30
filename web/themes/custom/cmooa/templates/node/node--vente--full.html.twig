@@ -1,0 +1,298 @@
+{#
+/**
+ * Template pour afficher une vente en mode galerie ou en mode détail
+ */
+#}
+
+{% if is_galerie %}
+	<div class="banner-vente hasfnd">
+		{% if tableau.image_url %}
+			<img src="{{ tableau.image_url }}" alt="{{ tableau.image_alt }}">
+		{% endif %}
+		<div class="container">
+			<div class="row">
+				<div class="head-vente">
+					<a class="back" href="/galerie" title="Retour">retour</a>
+					<span class="nbr-venter">{{ tableau.vente_numero }}</span>
+					<h1>{{ tableau.titre_vente }}</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="detail-galerie">
+		<div class="inner-detail">
+			<div class="head-list-galerie">
+				<div class="container">
+					<div class="row">
+						<h2 class="title-image">{{ tableau.nombre_images }}
+							image{{ tableau.nombre_images != 1 ? 's' : '' }}</h2>
+						<div class="type-affichage">
+							<span>Affichage</span>
+							<a class="type-slide active" href="#"></a>
+							<a class="type-liste" href="#"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="body-list-galerie">
+				<div class="container">
+					<div class="row">
+						<div class="items-detail">
+							{% for image in tableau.images %}
+								<a class="item-detail-galerie" href="{{ image.url }}">
+									<img src="{{ image.url }}" alt="{{ image.alt }}">
+									<p>Image de la
+										{{ tableau.vente_numero }}</p>
+								</a>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="inner-detail">
+			<div class="head-list-galerie">
+				<div class="container">
+					<div class="row">
+						<h2 class="title-video">{{ tableau.nombre_videos }}
+							vidéo{{ tableau.nombre_videos != 1 ? 's' : '' }}</h2>
+						<div class="type-affichage">
+							<span>Affichage</span>
+							<a class="type-slide active" href="#"></a>
+							<a class="type-liste" href="#"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="body-list-galerie">
+				<div class="container">
+					<div class="row">
+						<div class="items-detail">
+							{% for video in tableau.videos %}
+								<a class="item-detail-galerie" href="{{ video.url }}" target="_blank" id="video-{{ video.id }}">
+									<div class="visu-detail-galerie">
+										{% if video.frame %}
+											{{ video.frame|raw }}
+										{% else %}
+											<img src="{{ video.thumbnail }}" alt="{{ video.alt }}" width="594" height="432">
+										{% endif %}
+									</div>
+									<p>{{ video.title ? video.title : 'Vidéo de la ' ~ tableau.vente_numero }}</p>
+								</a>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% else %}
+	<div class="banner-vente hasfnd">
+		<img src="{{ vente.image_url }}" alt="{{ vente.image_alt }}">
+		<div class="container">
+			<div class="row">
+				<div class="head-vente">
+					<a class="back" href="/calendrier_ventes" title="Retour aux ventes">retour</a>
+					<span class="nbr-venter">{{ vente.vente_numero }}</span>
+					<h1>{{ vente.title }}</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="detail-infos-vente">
+		<div class="container">
+			<div class="row">
+				<div class="c-detail-infos">
+					<div class="visu-venter">
+						<img src="{{ vente.image_url }}" alt="{{ vente.image_alt }}">
+					</div>
+					<div class="desc-vente">
+						<div class="row-infos-vente">
+							<div class="date-enchere">
+								<p>{{ vente.date_label }}
+									{% if vente.is_livestream %}
+										<span>Enchère en ligne</span>
+									{% endif %}
+								</p>
+							</div>
+							<div class="time-cloture">
+								<p>
+									{{ vente.temps_restant }}
+								</p>
+							</div>
+							<div class="agent-contact">
+								<p>Tél.
+									{{ vente.telephone }}
+									<a href="mailto:{{ vente.email }}">{{ vente.email }}</a>
+								</p>
+							</div>
+						</div>
+						<div class="row-desc-vente">
+							<p>{{ vente.description }}</p>
+						</div>
+						<div class="row-link-vente">
+							{% if vente.document_url %}
+								<a href="{{ vente.document_url }}">Imprimer la liste des lots</a>
+								<a href="{{ vente.document_url }}" download="catalogue_vente_{{ vente.vente_numero }}.pdf">Télécharger le catalogue</a>
+							{% endif %}
+							{% if vente.show_participer_button %}
+								<a class="indetifier" href="/inscription/{{ vente.nid }}">Participer a la vente</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% if videos_galerie|length > 0 %}
+		<div class="slide-sup">
+			<div class="container">
+				<div class="row">
+					<div class="c-slide-up">
+						{% for video in videos_galerie %}
+							<a class="item-slide-sup" href="{{ video.url }}" target="_blank">
+								<div class="visu-slide-up">
+									{% if video.frame %}
+										{{ video.frame|raw }}
+									{% elseif video.thumbnail %}
+										<img src="{{ video.thumbnail }}" alt="{{ video.alt }}">
+									{% else %}
+										<img src="/themes/custom/cmooa/medias/images/img-item-galerie.jpg" alt="{{ video.alt }}">
+									{% endif %}
+								</div>
+								<p>{{ video.title ? video.title : 'Vidéo de la vente' }}</p>
+							</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	{% elseif elements_galerie %}
+		<div class="slide-sup">
+			<div class="container">
+				<div class="row">
+					<div class="c-slide-up">
+						{% for item in elements_galerie %}
+							<a class="item-slide-sup" href="{{ item.lien.url }}">
+								<div class="visu-slide-up">
+									<img src="{{ file_url(item.image) }}" alt="{{ item.image_alt }}">
+								</div>
+								<p>{{ item.description }}</p>
+							</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	{% if oeuvres_phares|length > 0 %}
+		<div class="oeuvres-main oeuvres-phares">
+			<div class="container">
+				<div class="row">
+					<div class="title-section">
+						<h2>Œuvres phares de la vente</h2>
+						<div class="wrrap-arrow">
+							<div class="arrow-prev prev-03"></div>
+							<div class="arrow-next next-03"></div>
+						</div>
+						<a class="hide-show-slide" href=""></a>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="slide-main slider-encheres">
+						{% for oeuvre in oeuvres_phares %}
+							<div class="item-slide-main">
+								<div class="visu-slide">
+									<img src="{{ oeuvre.image_url|default('themes/custom/cmooa/medias/images/img-slide-majeurs-01.jpg') }}" alt="{{ oeuvre.image_alt|default('') }}">
+								</div>
+								<div class="desc-slide">
+									<p>{{ oeuvre.auteur }}</p>
+									<span class="title-oeuvre">{{ oeuvre.title }}</span>
+									<span class="prix-oeuvre">{{ oeuvre.estimation }}</span>
+									<span class="enchere-oeuvre">Enchère :
+										<span class="prix-enchere">{{ oeuvre.enchere }}</span>
+									</span>
+									<div class="hover">
+										<a href="{{ oeuvre.lien_lot }}">Voir le détail du lot</a>
+										<span class="hart"></span>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="liste-lot">
+		<div class="container">
+			<div class="row">
+				<div class="title-section">
+					<h2>Liste de lots</h2>
+					<div class="timer-list-lots">{{ vente.temps_restant }}</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="filtre">
+					<div class="item-filtre">
+						<form method="get">
+							<select class="form-select" name="field_auteur" onchange="this.form.submit()">
+								<option value="">Filtrer par artiste</option>
+								{% for auteur in all_auteurs %}
+									<option value="{{ auteur }}" {% if auteur_filter == auteur %} selected {% endif %}>{{ auteur }}</option>
+								{% endfor %}
+							</select>
+						</form>
+					</div>
+					<a class="show-all-lots" href="{{ url('<current>') }}">Afficher les
+						{{ rows|length }}
+						lots</a>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="c-liste-lot">
+					{% for key, row in rows %}
+						<div class="item-lot">
+							<div class="visu-lot">
+								<img src="{{ row.image_url|default('medias/images/img-visu-lots.jpg') }}" alt="{{ row.title|default('') }}">
+							</div>
+							<div class="desc-lot">
+								<div class="c-desc-lot">
+									<span class="nmr{% if key == 4 %} red{% endif %}">{{ '%02d'|format(key + 1) }}</span>
+									{% if row.auteur %}
+										<p>{{ row.auteur }}</p>
+									{% endif %}
+									<span class="title-oeuvre">{{ row.title }}</span>
+									<span class="prix-oeuvre">{{ row.estimation }}</span>
+									<span class="enchere-oeuvre">Enchère :
+										<span class="prix-enchere">{{ row.enchere }}</span>
+									</span>
+									<div class="hover">
+										<a href="{{ row.lien_lot }}">Voir le détail du lot</a>
+										<span class="hart"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			{% if rows|length > 8 %}
+				<div class="row row-more">
+					{{pager}}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endif %}

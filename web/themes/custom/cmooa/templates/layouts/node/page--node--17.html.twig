@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Template pour la page À propos.
+ */
+#}
+{% if page.header %}
+  {{ page.header }}
+{% endif %}
+
+<main id="main" role="main">
+  {% if image_slide %}
+  <div class="banner-propos hasfnd">
+    <img src="{{ image_slide.url }}" alt="{{ image_slide.alt }}">
+    <div class="container">
+      <div class="row">
+        <div class="head-propos">
+          <h1>{{ page_title }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="body-apropos">
+    <div class="c-apropos">
+      {% if page_body_decoded %}
+        {{ page_body_decoded|raw }}
+      {% elseif page_body_processed %}
+        {{ page_body_processed|raw }}
+      {% else %}
+        <p>Aucun contenu disponible pour cette page.</p>
+      {% endif %}
+    </div>
+  </div>
+</main>
+
+{# Footer #}
+{% if page.footer %}
+  {{ page.footer }}
+{% endif %}

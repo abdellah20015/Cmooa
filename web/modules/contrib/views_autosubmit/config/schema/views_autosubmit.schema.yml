@@ -1,0 +1,10 @@
+views.exposed_form.autosubmit:
+  type: views_exposed_form
+  label: 'Autosubmit'
+  mapping:
+    autosubmit_hide:
+      type: boolean
+      label: 'Hide submit button'
+    timeout:
+      type: integer
+      label: 'Timeout for typing action'

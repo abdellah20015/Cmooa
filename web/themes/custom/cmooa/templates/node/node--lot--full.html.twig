@@ -1,0 +1,265 @@
+<div class="head-lot">
+	<div class="container">
+		<div class="row">
+			<div class="c-head-lot">
+				<a class="back-lot" href="/results">Retour à la liste de lots</a>
+				<div class="ilustration-lot"><img src="{{ lot.image_url }}" alt="{{ lot.image_alt }}">
+					<p>Ce lot est inclut dans la vente n°
+						{{ vente.nid }}
+						<span>{{ vente.title }}</span>
+					</p>
+				</div>
+				<div class="date-enchere-lot">
+					<p>{{ vente.date_label }}
+						<span>{{ vente.lieu }}</span>
+					</p>
+				</div>
+				{% if is_admin %}
+					<div class="infos-users">
+						<a href="">
+							<span class="inscrits">
+								<span>{{ lot.registered_users_count }}</span>
+								inscrits</span>
+							<span class="connectes">
+								<spawfn>{{ lot.connected_users_count }}</spawfn>connectés</span>
+						</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="body-lot{% if is_admin %} enchere-lot{% endif %}">
+	<div class="container">
+		<div class="row">
+			<div class="col-visu-lot">
+				{% for image in lot.images %}
+					<a href="{{ image.url }}"><img src="{{ image.url }}" alt="{{ image.alt }}"></a>
+				{% endfor %}
+			</div>
+			<div class="col-desc-lot">
+				<div class="nbr-lot">
+					{% if is_admin %}
+						<span>Vente du lot n°
+							{{ lot.nid }}</span>
+					{% else %}
+						<span>{{ lot.nid }}</span>
+					{% endif %}
+					{% if user_authenticated and not is_admin %}
+						<a class="add-favoris {{ is_favoris ? 'active' : '' }}" data-lot-id="{{ lot.nid }}" data-lot-title="{{ lot.title }}" data-lot-author="{{ lot.auteur }}"></a>
+					{% endif %}
+				</div>
+				<div class="name-oeuvre">{{ lot.auteur }}</div>
+				<div class="autheur-oeuvre">{{ lot.title }}</div>
+				{% if not is_admin %}
+					<p>{{ lot.description }}</p>
+					{% if lot.document_url %}
+						<a class="rapport" href="{{ lot.document_url }}" download="condition_lot{{ lot.nid }}.pdf">Rapport de condition</a>
+					{% endif %}
+				{% endif %}
+				<div class="infos-sup-vente{% if is_admin %} infos-sup-vente-live{% endif %}">
+					{% if not is_admin %}
+						{% if vente.statut != 'passe' %}
+							<div class="time-left">{{ vente.temps_restant }}</div>
+						{% endif %}
+						<div class="estimation">
+							<span>Estimation :</span>
+							{{ lot.estimation }}
+							<div class="btns-covert">
+								<div class="convert active" data-currency="dh">Dhs</div>
+								<div class="convert" data-currency="eur">&euro;</div>
+							</div>
+						</div>
+					{% else %}
+						<div class="estimation-live">
+							<div class="estimation">
+								<span>Estimation :</span>
+								{{ lot.estimation }}</div>
+							<div class="pas-enchere">Le pas d'enchère sur ce lot est de :
+								<span>1000 Dhs</span>
+							</div>
+						</div>
+					{% endif %}
+
+					<div class="current-enchere hand">
+						<div class="value-enchere">
+							<span class="label-enchere">Enchère en cours</span>
+							{% if is_admin %}
+								<span class="c-value-enchere">{{ lot.enchere_dh|replace({' DH': ''}) }}</span>
+								<sub>Dhs</sub>
+							{% else %}
+								<span class="c-value-enchere">{{ lot.enchere_dh }}</span>
+							{% endif %}
+							{% if user_has_highest_bid and vente.statut == 'en_cours' and not is_admin and not lot.is_adjuged %}
+								<span class="hand-icon">Vous avez la main</span>
+							{% endif %}
+
+							{# Affichage pour les utilisateurs normaux si le lot est adjugé #}
+							{% if not is_admin and lot.is_adjuged %}
+								<div class="lot-adjuge-message">
+									<p style="color: #ff6b6b; font-weight: bold; margin-top: 10px;">Ce lot a été adjugé</p>
+								</div>
+							{% endif %}
+						</div>
+
+						{% if is_admin %}
+							{% if lot.is_adjuged %}
+								<div class="adjuge-status">
+									<p>Cette enchère est adjugée</p>
+								</div>
+							{% else %}
+								{# Ajout du select pour l'admin #}
+								<form method="post" action="" style="margin-top: 10px;">
+									<input type="hidden" name="lot_id" value="{{ lot.nid }}">
+									<input type="hidden" name="submit_enchere" value="1">
+									<div class="form-group">
+										<select name="enchere_value" id="enchere_value_admin" class="form-control">
+											{% for proposition in lot.enchere_propositions %}
+												<option value="{{ proposition.value }}">{{ proposition.dh }}</option>
+											{% endfor %}
+										</select>
+									</div>
+									<button type="submit" class="sindentifier" style="margin-top: 5px;">Valider cette enchère</button>
+								</form>
+							{% endif %}
+						{% endif %}
+					</div>
+
+					{% if is_admin and lot.bids|length > 0 %}
+						<div class="enchere-propose">
+							<span class="label-propose">Nouvelle enchère proposée par</span>
+							<span class="name">{{ lot.bids[0].username }}</span>
+						</div>
+					{% endif %}
+
+					{% if vente.statut == 'en_cours' or (vente.statut == 'futur' and vente.is_today) %}
+						{% if not is_admin %}
+							{# Vérifier si le lot n'est pas adjugé avant d'afficher les options d'enchères #}
+							{% if not lot.is_adjuged %}
+								<div class="next-enchere">
+									<div class="value-enchere">
+										<span class="label-enchere">Enchère suivante</span>
+										<span class="next-value">{{ lot.next_enchere_dh }}</span>
+									</div>
+									<div class="list-propsition"></div>
+									{% if not user_authenticated %}
+										<a class="sindentifier" href="/user/login?destination={{ current_path }}">S'identifier</a>
+									{% elseif not user_inscrit %}
+										<a class="sindentifier" href="/inscription/{{ vente.nid }}/{{ lot.nid }}">S'inscrire</a>
+									{% else %}
+										<form method="post" action="">
+											<input type="hidden" name="lot_id" value="{{ lot.nid }}">
+											<input type="hidden" name="submit_enchere" value="1">
+											<div class="form-group">
+												<select name="enchere_value" id="enchere_value" class="form-control">
+													{% for proposition in lot.enchere_propositions %}
+														<option value="{{ proposition.value }}">{{ proposition.dh }}</option>
+													{% endfor %}
+												</select>
+											</div>
+											<button type="submit" class="sindentifier">Valider l'enchère</button>
+										</form>
+									{% endif %}
+								</div>
+								<div class="pas-enchere">Le pas d'enchère sur ce lot est de :
+									<span>1000 Dhs</span>
+								</div>
+							{% else %}
+								{# Message pour utilisateur quand le lot est adjugé #}
+								<div class="lot-adjuge-user">
+									<p style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 20px; background-color: #f8f8f8; border-radius: 5px; margin-top: 15px;">
+										<img src="https://cdn-icons-png.flaticon.com/128/11969/11969135.png" alt="Icône adjudication" style="width: 30px; vertical-align: middle; margin-bottom: 10px;"><br>
+										Ce lot a été adjugé.<br>
+										Les enchères ne sont plus possibles.
+									</p>
+								</div>
+
+							{% endif %}
+						{% else %}
+							<div class="action-lot">
+								{% if not lot.is_adjuged %}
+									<form method="post" action="" style="display: inline;">
+										<input type="hidden" name="lot_id" value="{{ lot.nid }}">
+										<input type="hidden" name="submit_adjuged" value="1">
+										<button type="submit" class="adjuge">Lot adjugé</button>
+									</form>
+								{% endif %}
+								<a class="sindentifier" href="/results" style="margin-left: 10px;">Passer au lot suivant ></a>
+							</div>
+						{% endif %}
+					{% elseif vente.statut == 'passe' %}
+						<div class="vente-terminee">
+							<p class="status-message">Cette vente est terminée</p>
+						</div>
+					{% elseif vente.statut == 'futur' %}
+						<div class="vente-future">
+							<p class="status-message">Cette vente ouvrira le
+								{{ vente.date_debut_formatted }}</p>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% if is_admin %}
+	<div class="cover-liste"></div>
+	<div class="content-liste">
+		<h2>{{ lot.connected_users_count }}
+			utilisateurs connectés</h2>
+		<div class="inner-list-users">
+			{% for bid in lot.bids %}
+				{% set user_bids = lot.bids|filter(b => b.username == bid.username) %}
+				{% if loop.index == 1 or lot.bids[loop.index0 - 1].username != bid.username %}
+					<a class="show-detail" href="">{{ bid.username }}</a>
+					<div class="detail-inner-users">
+						<a class="hide-detail" href="">{{ bid.username }}</a>
+						<div class="lots-users">
+							<div class="lot-users">
+								<div class="title-lot-user">
+									<p>
+										<span>Lot n°
+											{{ lot.nid }}</span>
+										{{ lot.auteur }}
+										<span>{{ lot.title }}</span>
+									</p>
+								</div>
+								<div class="encher-of-user">
+									<div class="label-encher-of-user">Ses enchères</div>
+									<ul>
+										{% for user_bid in user_bids %}
+											<li>
+												<span class="offre-lot-prix">{{ (user_bid.enchere|number_format(0, ',', ' ')) }}
+													Dhs</span>
+												<span class="offre-lot-date">{{ user_bid.created|date('H:i') }}</span>
+											</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endif %}
+
+{# Formulaire caché pour les favoris #}
+{% if user_authenticated and not is_admin %}
+	<form id="favoris-form" method="post" action="" style="display: none;">
+		<input type="hidden" name="lot_id" value="{{ lot.nid }}">
+		<input type="hidden" name="submit_favoris" value="1">
+		<input type="hidden" name="favoris_action" value="toggle">
+	</form>
+{% endif %}
+
+<script>
+window.lotData = {{ lot|json_encode|raw }};
+window.userAuthenticated = {{ user_authenticated ? 'true' : 'false' }};
+window.isFavoris = {{ is_favoris ? 'true' : 'false' }};
+window.venteStatut = '{{ vente.statut }}';
+window.isAdmin = {{ is_admin ? 'true' : 'false' }};
+window.isLotAdjuged = {{ lot.is_adjuged ? 'true' : 'false' }};
+</script>

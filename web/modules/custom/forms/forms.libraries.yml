@@ -1,0 +1,6 @@
+sweetalert:
+  version: '11.0'
+  js:
+    https://cdn.jsdelivr.net/npm/sweetalert2@11: { type: external, minified: true }
+  dependencies:
+    - core/drupal

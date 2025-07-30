@@ -1,0 +1,8 @@
+name: Forms
+type: module
+description: Module pour gérer le formulaire de contact dynamique avec stockage en base de données et SweetAlert.
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - drupal:block
+  - drupal:taxonomy

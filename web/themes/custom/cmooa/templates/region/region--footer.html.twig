@@ -1,0 +1,66 @@
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="row-logo">
+        {% if logo_footer_url %}
+          <img src="{{ logo_footer_url }}" alt="Logo Footer">
+        {% endif %}
+        <div class="sepa"></div>
+        <div class="link-rsc">
+          {% for item in social_menu %}
+            <a href="{{ item.url }}"><span class="{{ item.icon }}"></span></a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="infos-footer">
+        {% if infos_footer.adresse %}
+          <p class="adresse">{{ infos_footer.adresse|raw }}</p>
+        {% endif %}
+        {% if infos_footer.plan_lien.url %}
+          <p class="show-plan"><a href="{{ infos_footer.plan_lien.url }}">{{ infos_footer.plan_lien.text }}</a></p>
+        {% endif %}
+        {% if infos_footer.horaires %}
+          <p class="show-horraire">{{ infos_footer.horaires|raw }}</p>
+        {% endif %}
+        {% if infos_footer.telephone %}
+          <p class="show-tel">{{ infos_footer.telephone }}</p>
+        {% endif %}
+        {% if infos_footer.email.url %}
+          <p class="show-email"><a href="{{ infos_footer.email.url }}" title="{{ infos_footer.email.text }}">{{ infos_footer.email.text }}</a></p>
+        {% endif %}
+      </div>
+      <div class="menu-footer">
+        <ul>
+          {% for item in main_menu %}
+            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="menu-footer2">
+        <ul>
+          {% for item in footer_menu %}
+            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="newlettre">
+        <div class="form-news">
+          {{ newsletter_form }}
+        </div>
+        <div class="copy-right">
+          <p>{{ 'now'|date('Y') }} © CMOOA. Tous droits réservés.</p>
+          <p class="realisation">
+            <span>Une réalisation </span>
+            {% if infos_footer.realisation_lien.url and infos_footer.realisation_logo.uri %}
+              <a href="{{ infos_footer.realisation_lien.url }}">
+                <img src="{{ file_url(infos_footer.realisation_logo.uri) }}" alt="{{ infos_footer.realisation_logo.alt }}">
+              </a>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

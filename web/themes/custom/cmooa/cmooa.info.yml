@@ -1,0 +1,15 @@
+name: CMOOA Theme
+type: theme
+description: Théme personnalisé pour le site web de la CMOOA
+core_version_requirement: ^10 || ^12
+base theme: false
+screenshot: cmooa.png
+logo: logo.svg
+libraries:
+  - cmooa/global-styling
+regions:
+  header: Header
+  top_content: Top Content
+  content: Content
+  bottom_content: Bottom Content
+  footer: Footer

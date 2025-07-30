@@ -1,0 +1,51 @@
+<div class="banner-home">
+  <div class="slider-home" id="block-slide">
+    {% for row in rows %}
+      <div class="item-slide hasfnd">
+        <img src="{{ row.image_url }}" alt="{{ row.title }}">
+        <div class="detail-item-slide{% if row.is_livestream %} dt-prochaine{% endif %}">
+          <div class="slider-progress progress-mobile">
+            <div class="progress"></div>
+          </div>
+          <div class="infos-vente-slide">
+            {% if row.is_livestream %}
+              <div class="carte-stream">Vente en livestream</div>
+            {% endif %}
+            <div class="title-vente-slide">
+              {% if row.statut == 'en_cours' %}
+                Vente en cours - Vente n° {{ row.nid }}
+              {% elseif row.statut == 'futur' %}
+                Vente à venir - Vente n° {{ row.nid }}
+              {% elseif row.statut == 'passe' %}
+                Vente passée - Vente n° {{ row.nid }}
+              {% endif %}
+            </div>
+            <div class="name-vente-slide">{{ row.title }}</div>
+            <div class="date-vente-slide">
+              <div class="label-date">{{ row.date_label }}</div>
+              <div class="label-encheres">{{ row.lieu }}</div>
+            </div>
+            {% if row.statut == 'en_cours' %}
+              <div class="invitation">
+                <p>Invitation à consigner avant {{ row.date_fin_formatted }} - <a href="/contact">{{ 'Nous contacter'|t }}</a></p>
+              </div>
+            {% endif %}
+          </div>
+          <div class="link-detail-vente">
+            <a href="{{ row.lien.url }}"><span>{{ row.lien.title }}</span></a>
+            {% if row.is_livestream %}
+              {% if row.statut == 'en_cours' %}
+                <a href="/livestream/{{ row.nid_dynamic }}"><span>En direct ici</span></a>
+              {% elseif row.statut == 'passe' %}
+                <a href="{{ row.lien.url }}"><span>Voir détail de la vente</span></a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="slider-progress progress-dskt">
+    <div class="progress"></div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="form-contact">
+  <h2>Laissez-nous un message</h2>
+  <form action="/contact" method="post" id="forms-contact-form" accept-charset="UTF-8">
+    <div class="row-form">
+      <div class="col-form">
+        <label for="nom"></label>
+        {{ form.nom|without('title') }}
+      </div>
+      <div class="col-form">
+        <label for="prenom"></label>
+        {{ form.prenom|without('title') }}
+      </div>
+      <div class="col-form">
+        <label for="email"></label>
+        {{ form.email|without('title') }}
+      </div>
+    </div>
+    <div class="row-form">
+      <div class="col-form">
+        <label for="telephone"></label>
+        {{ form.telephone|without('title') }}
+      </div>
+      <div class="col-form2">
+        <label for="sujet"></label>
+        {{ form.sujet|without('title') }}
+      </div>
+    </div>
+    <div class="row-form">
+      <div class="col-form3">
+        <label for="message"></label>
+        {{ form.message|without('title') }}
+      </div>
+    </div>
+    <div class="row-form">
+      <div class="col-action">
+        <div class="msg-error" id="form-error-message"></div>
+        {{ form.actions.submit }}
+      </div>
+    </div>
+    {{ form.form_build_id }}
+    {{ form.form_token }}
+    {{ form.form_id }}
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Vérifier s'il y a des messages dans drupalSettings
+    if (typeof drupalSettings !== 'undefined' && drupalSettings.forms) {
+      if (drupalSettings.forms.success_message) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Succès',
+          text: drupalSettings.forms.success_message,
+          confirmButtonText: 'OK'
+        });
+      }
+
+      if (drupalSettings.forms.error_message) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: drupalSettings.forms.error_message,
+          confirmButtonText: 'OK'
+        });
+      }
+    }
+
+    const form = document.querySelector('form#forms-contact-form');
+    if (!form || form.classList.contains('processed')) return;
+    form.classList.add('processed');
+
+    form.addEventListener('submit', function (event) {
+      // Vérifier s'il y a des erreurs de validation
+      const errors = form.querySelectorAll('.form-item--error-message, .messages--error');
+
+      if (errors.length > 0) {
+        event.preventDefault();
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Veuillez corriger les erreurs dans le formulaire.',
+          confirmButtonText: 'OK'
+        });
+      }
+      // Si pas d'erreurs, laisser le formulaire se soumettre normalement
+    });
+  });
+</script>

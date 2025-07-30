@@ -1,0 +1,38 @@
+<div class="banner-propos hasfnd">
+  <img src="themes/custom/cmooa/medias/images/img-a-propos.jpg" alt="">
+  <div class="container">
+    <div class="row">
+      <div class="head-propos">
+        <h1>Contactez-nous</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="body-contact">
+  <h2>Pour toute demande d'information, notre équipe se tient à votre disposition :</h2>
+  <div class="contact-infos">
+    <div class="col-contact-infos">
+      <h3>Hôtel des ventes</h3>
+      <div class="adress">{{ contact_data.adresse|raw }} <a href="https://maps.app.goo.gl/jjaLCChJDKXvsa9p8">Voir sur le plan</a></div>
+      <div class="tel-contact">
+        {% for phone in contact_data.telephone %}
+          <a href="tel:{{ phone }}">{{ phone }}</a>
+        {% endfor %}
+      </div>
+      <div class="mail-contact"><a href="mailto:{{ contact_data.email }}">{{ contact_data.email }}</a></div>
+      <h3>Hôraire d'ouverture</h3>
+      <div class="horaire-contact">{{ contact_data.horaire|raw }}</div>
+    </div>
+    <div class="col-contact-infos">
+      <h3>Contact direct</h3>
+      <div class="agent">
+        <span class="name-agent">{{ contact_data.contact_nom }}</span>
+        <span>Directeur de CMOOA Vente aux enchères</span>
+        <span>Director of CMOOA Vente aux enchères</span>
+      </div>
+      <div class="tel-contact"><a href="tel:{{ contact_data.contact_telephone }}">{{ contact_data.contact_telephone }}</a></div>
+      <div class="mail-contact"><a href="mailto:{{ contact_data.contact_email }}">{{ contact_data.contact_email }}</a></div>
+    </div>
+  </div>
+  {{ contact_form }}
+</div>

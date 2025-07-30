@@ -1,0 +1,12 @@
+name: Views Autosubmit
+type: module
+description: Views exposed filter Autosubmit for Drupal.
+core_version_requirement: ^8.8 || ^9 || ^10 || ^11
+package: Views
+dependencies:
+  - drupal:views
+
+# Information added by Drupal.org packaging script on 2025-01-21
+version: '8.x-1.7'
+project: 'views_autosubmit'
+datestamp: 1737453421
