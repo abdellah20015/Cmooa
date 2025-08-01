@@ -1,0 +1,7 @@
+web/core/tests/
+web/core/modules/*/tests/
+web/modules/contrib/*/tests/
+web/sites/*/tests/
+*.test
+phpunit.xml*
+behat.yml*
