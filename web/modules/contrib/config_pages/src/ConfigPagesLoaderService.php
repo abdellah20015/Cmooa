@@ -2,6 +2,7 @@
 
 namespace Drupal\config_pages;
 
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\config_pages\Entity\ConfigPages;
 
 /**
@@ -111,10 +112,22 @@ class ConfigPagesLoaderService implements ConfigPagesLoaderServiceInterface {
     // Exit if empty config page.
     $config_page = is_object($type) ? $type : $this->load($type);
     if (empty($config_page) || !$config_page->hasField($field_name)) {
-      return [];
+      return [
+        '#cache' => [
+          'tags' => [
+            'config_pages_list:' . $type,
+          ]
+        ]
+      ];
     }
 
-    return $config_page->get($field_name)->view($view_mode);
+    $build = $config_page->get($field_name)->view($view_mode);
+
+    CacheableMetadata::createFromRenderArray($build)
+      ->addCacheableDependency($config_page)
+      ->applyTo($build);
+
+    return $build;
   }
 
 }

@@ -21,7 +21,7 @@ class UiPageTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * Tests that the ConfigPages listing page works.

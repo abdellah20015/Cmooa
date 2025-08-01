@@ -93,7 +93,6 @@ class ClearConfigPageTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
 
     // We edit the page setting a value.
-    $this->clickLink('Edit');
     $this->submitForm(['field_test[0][value]' => 'Test value'], 'Save');
 
     // The value is persisted.

@@ -34,7 +34,7 @@ class ConfigPagesStorage extends SqlContentEntityStorage {
   /**
    * {@inheritdoc}
    */
-  public function loadMultiple(array $ids = NULL) {
+  public function loadMultiple(?array $ids = NULL) {
     $entities = [];
 
     // Return all entities if $ids is NULL.

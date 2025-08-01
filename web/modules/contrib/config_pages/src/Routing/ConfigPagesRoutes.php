@@ -37,7 +37,7 @@ class ConfigPagesRoutes {
           'label' => $label,
         ],
         [
-          '_permission'  => 'edit config_pages entity+edit ' . $cp_type->id() . ' config page entity',
+          '_custom_access'  => '\Drupal\config_pages\Controller\ConfigPagesController::access',
         ],
         [
           '_admin_route' => TRUE,

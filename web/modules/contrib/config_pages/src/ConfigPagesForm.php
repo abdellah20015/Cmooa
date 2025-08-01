@@ -81,11 +81,11 @@ class ConfigPagesForm extends ContentEntityForm {
    *   The language manager.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger.
-   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
+   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface|null $entity_type_bundle_info
    *   The entity type bundle service.
-   * @param \Drupal\Component\Datetime\TimeInterface $time
+   * @param \Drupal\Component\Datetime\TimeInterface|null $time
    *   The time service.
-   * @param \Drupal\Core\Session\AccountProxyInterface $user
+   * @param \Drupal\Core\Session\AccountProxyInterface|null $user
    *   User proxy, for checking permissions.
    */
   public function __construct(EntityRepositoryInterface $entity_repository,
@@ -94,9 +94,9 @@ class ConfigPagesForm extends ContentEntityForm {
                               EntityStorageInterface $config_pages_type_storage,
                               LanguageManagerInterface $language_manager,
                               MessengerInterface $messenger,
-                              EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL,
-                              TimeInterface $time = NULL,
-                              AccountProxyInterface $user = NULL
+                              ?EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL,
+                              ?TimeInterface $time = NULL,
+                              ?AccountProxyInterface $user = NULL
   ) {
     parent::__construct($entity_repository, $entity_type_bundle_info, $time);
     $this->configPagesStorage = $config_pages_storage;

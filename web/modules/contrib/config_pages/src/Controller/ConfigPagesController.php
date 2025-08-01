@@ -116,7 +116,7 @@ class ConfigPagesController extends ControllerBase {
   /**
    * Presents the config page creation/edit form.
    *
-   * @param \Drupal\config_pages\ConfigPagesTypeInterface $config_pages_type
+   * @param \Drupal\config_pages\ConfigPagesTypeInterface|null $config_pages_type
    *   The config page type to add.
    *
    * @return array
@@ -125,7 +125,25 @@ class ConfigPagesController extends ControllerBase {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function classInit(ConfigPagesTypeInterface $config_pages_type = NULL) {
+  public function classInit(?ConfigPagesTypeInterface $config_pages_type = NULL) {
+    $config_page = $this->getConfigPage($config_pages_type);
+
+    return $this->entityFormBuilder()->getForm($config_page);
+  }
+
+  /**
+   * Load or create a config page entity for the given type.
+   *
+   * @param \Drupal\config_pages\ConfigPagesTypeInterface $config_pages_type
+   *   The config page type.
+   *
+   * @return \Drupal\config_pages\ConfigPagesInterface
+   *   The config page entity.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  private function getConfigPage(ConfigPagesTypeInterface $config_pages_type) {
     $cp_type = $config_pages_type->id();
     $typeEntity = ConfigPagesType::load($cp_type);
 
@@ -146,14 +164,44 @@ class ConfigPagesController extends ControllerBase {
     if (!empty($config_page_ids)) {
       $config_page_id = array_shift($config_page_ids);
       $entityStorage = $this->entityTypeManager->getStorage('config_pages');
+      /** @var ConfigPagesInterface $config_page */
       $config_page = $entityStorage->load($config_page_id);
     }
     else {
+      /** @var ConfigPagesInterface $config_page */
       $config_page = $this->configPagesStorage->create([
         'type' => $cp_type,
       ]);
     }
-    return $this->entityFormBuilder()->getForm($config_page);
+
+    return $config_page;
+  }
+
+  /**
+   * Custom access check for config page routes.
+   *
+   * @param \Drupal\config_pages\ConfigPagesTypeInterface $config_pages_type
+   *   The config page type.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  public function access(ConfigPagesTypeInterface $config_pages_type) {
+    $config_page = $this->getConfigPage($config_pages_type);
+
+    // Get the access result
+    $access_result = $config_page->access('update', NULL, TRUE);
+
+    // Ensure we have an AccessResult object
+    if (!$access_result instanceof \Drupal\Core\Access\AccessResultInterface) {
+      // Convert boolean to AccessResult
+      $access_result = $access_result ?
+        \Drupal\Core\Access\AccessResult::allowed() :
+        \Drupal\Core\Access\AccessResult::forbidden();
+    }
+
+    return $access_result->cachePerPermissions();
+
   }
 
   /**

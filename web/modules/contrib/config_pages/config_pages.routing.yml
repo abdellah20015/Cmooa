@@ -14,7 +14,7 @@ config_pages.add_form:
   options:
     _admin_route: TRUE
   requirements:
-    _entity_access: 'config_pages_type.update'
+    _custom_access: '\Drupal\config_pages\Controller\ConfigPagesController::access'
 
 entity.config_pages_type.delete_form:
   path: '/admin/structure/config_pages/types/manage/{config_pages_type}/delete'
