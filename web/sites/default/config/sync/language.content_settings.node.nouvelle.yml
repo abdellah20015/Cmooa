@@ -1,0 +1,11 @@
+uuid: d362fa1d-b4db-4c41-aba8-1194d2e83de3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.nouvelle
+id: node.nouvelle
+target_entity_type_id: node
+target_bundle: nouvelle
+default_langcode: site_default
+language_alterable: false

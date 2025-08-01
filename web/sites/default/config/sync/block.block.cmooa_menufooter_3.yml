@@ -1,0 +1,25 @@
+uuid: f8bca517-cbb3-47e2-a289-3a29df8c0d3f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.footer-menu
+  module:
+    - system
+  theme:
+    - cmooa
+id: cmooa_menufooter_3
+theme: cmooa
+region: footer
+weight: 0
+provider: null
+plugin: 'system_menu_block:footer-menu'
+settings:
+  id: 'system_menu_block:footer-menu'
+  label: 'Menu Footer'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

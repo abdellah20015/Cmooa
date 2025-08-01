@@ -1,0 +1,29 @@
+uuid: a3b909ef-ceba-4137-92ab-ee0899a5a135
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.galerie
+    - field.storage.block_content.field_vente_reference
+    - node.type.vente
+id: block_content.galerie.field_vente_reference
+field_name: field_vente_reference
+entity_type: block_content
+bundle: galerie
+label: 'Vente associée'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      vente: vente
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

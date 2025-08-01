@@ -1,0 +1,26 @@
+uuid: 593827c7-3231-41d5-9e51-4a4581a82a8e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.infos_footer
+    - field.storage.block_content.field_adresse
+    - filter.format.basic_html
+    - filter.format.plain_text
+  module:
+    - text
+id: block_content.infos_footer.field_adresse
+field_name: field_adresse
+entity_type: block_content
+bundle: infos_footer
+label: Adresse
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+    - plain_text
+field_type: text_long

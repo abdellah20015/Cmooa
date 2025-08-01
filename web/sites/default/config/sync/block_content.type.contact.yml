@@ -1,0 +1,8 @@
+uuid: 1af85e00-2dc4-41a6-b604-65bc8d893a41
+langcode: fr
+status: true
+dependencies: {  }
+id: contact
+label: Contact
+revision: false
+description: null

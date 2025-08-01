@@ -1,0 +1,9 @@
+uuid: 1ba94c42-fdc7-4b82-a2e4-0ddea8cc7bc7
+langcode: fr
+status: true
+dependencies: {  }
+name: "Type d'enchère"
+vid: type_enchere
+description: "Types d'enchères pour les tableaux"
+weight: 0
+new_revision: false

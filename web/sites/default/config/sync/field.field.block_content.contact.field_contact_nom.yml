@@ -1,0 +1,19 @@
+uuid: 30276bbc-2f10-4dff-8c8b-bf6ec098b9f3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.contact
+    - field.storage.block_content.field_contact_nom
+id: block_content.contact.field_contact_nom
+field_name: field_contact_nom
+entity_type: block_content
+bundle: contact
+label: 'Contact direct (Nom)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

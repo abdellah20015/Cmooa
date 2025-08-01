@@ -1,0 +1,11 @@
+uuid: ec314776-429f-40c8-8343-75b2de5deb20
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.estimation_oeuvre
+id: block_content.estimation_oeuvre
+target_entity_type_id: block_content
+target_bundle: estimation_oeuvre
+default_langcode: site_default
+language_alterable: false

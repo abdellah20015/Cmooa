@@ -1,0 +1,29 @@
+uuid: f5d28e1a-931c-4cf3-94f3-7fb306872f57
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_document
+    - media.type.document
+    - node.type.vente
+id: node.vente.field_document
+field_name: field_document
+entity_type: node
+bundle: vente
+label: Document
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document: document
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

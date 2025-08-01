@@ -1,0 +1,21 @@
+uuid: 22e421c4-9688-4cac-ba7e-af11ccd52b7d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_nouvelle
+    - node.type.nouvelle
+  module:
+    - datetime
+id: node.nouvelle.field_date_nouvelle
+field_name: field_date_nouvelle
+entity_type: node
+bundle: nouvelle
+label: 'Date de nouvelle'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

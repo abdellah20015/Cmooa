@@ -1,0 +1,14 @@
+uuid: ab33be16-2f16-4926-b488-18c9adeb7015
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.utilisateur
+  module:
+    - user
+id: user_remove_role_action.utilisateur
+label: 'Enlever le rôle Utilisateur des utilisateurs sélectionnés'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: utilisateur

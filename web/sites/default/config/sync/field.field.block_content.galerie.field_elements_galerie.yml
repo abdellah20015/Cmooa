@@ -1,0 +1,31 @@
+uuid: 6f8d7014-e1ad-4dfa-bf9a-27be6bd12b07
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.galerie
+    - field.storage.block_content.field_elements_galerie
+    - paragraphs.paragraphs_type.galerie
+  module:
+    - entity_reference_revisions
+id: block_content.galerie.field_elements_galerie
+field_name: field_elements_galerie
+entity_type: block_content
+bundle: galerie
+label: 'Éléments de la galerie'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      galerie: galerie
+    negate: 0
+    target_bundles_drag_drop:
+      galerie:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions

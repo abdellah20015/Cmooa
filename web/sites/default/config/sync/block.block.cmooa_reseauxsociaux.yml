@@ -1,0 +1,25 @@
+uuid: 57c3e271-0769-4e13-82e5-2971c2346b3d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.social-menu
+  module:
+    - system
+  theme:
+    - cmooa
+id: cmooa_reseauxsociaux
+theme: cmooa
+region: header
+weight: 1
+provider: null
+plugin: 'system_menu_block:social-menu'
+settings:
+  id: 'system_menu_block:social-menu'
+  label: 'Réseaux sociaux'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

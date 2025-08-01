@@ -1,0 +1,118 @@
+uuid: e19c0b52-d66d-4658-b60d-5334577567cf
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.lot.field_auteur
+    - field.field.node.lot.field_description
+    - field.field.node.lot.field_document
+    - field.field.node.lot.field_enchere
+    - field.field.node.lot.field_image_lot
+    - field.field.node.lot.field_max
+    - field.field.node.lot.field_min
+    - field.field.node.lot.field_oeuvre_majeure
+    - field.field.node.lot.field_oeuvre_phare
+    - field.field.node.lot.field_vente_associee
+    - node.type.lot
+  module:
+    - user
+id: node.lot.default
+targetEntityType: node
+bundle: lot
+mode: default
+content:
+  field_auteur:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_description:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_document:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_enchere:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_image_lot:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_max:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_min:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_oeuvre_majeure:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_oeuvre_phare:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_vente_associee:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

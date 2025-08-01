@@ -1,0 +1,30 @@
+uuid: 2c3b2466-a6f0-4aa7-b37b-8b91b3cbc9ae
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:contact:10b8b1ae-9040-4fbf-8a67-c3d14b5e241c'
+  module:
+    - block_content
+    - system
+  theme:
+    - cmooa
+id: cmooa_contact
+theme: cmooa
+region: bottom_content
+weight: -5
+provider: null
+plugin: 'block_content:10b8b1ae-9040-4fbf-8a67-c3d14b5e241c'
+settings:
+  id: 'block_content:10b8b1ae-9040-4fbf-8a67-c3d14b5e241c'
+  label: Contact
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /contact

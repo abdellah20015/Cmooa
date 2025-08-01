@@ -1,0 +1,11 @@
+uuid: e929e495-f7f9-42eb-a866-d1f5db3b7f62
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.vente
+id: node.vente
+target_entity_type_id: node
+target_bundle: vente
+default_langcode: site_default
+language_alterable: false

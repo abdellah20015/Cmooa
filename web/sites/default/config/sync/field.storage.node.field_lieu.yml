@@ -1,0 +1,20 @@
+uuid: 7035375b-3ed4-4d7c-861c-c3e4cb68e9a7
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_lieu
+field_name: field_lieu
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

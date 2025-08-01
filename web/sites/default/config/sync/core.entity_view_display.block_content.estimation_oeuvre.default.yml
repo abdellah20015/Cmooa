@@ -1,0 +1,55 @@
+uuid: c1f2866f-f3db-436f-b871-63fe5fed12db
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.estimation_oeuvre
+    - field.field.block_content.estimation_oeuvre.field_description_estime
+    - field.field.block_content.estimation_oeuvre.field_image_estime
+    - field.field.block_content.estimation_oeuvre.field_lien_estime
+    - field.field.block_content.estimation_oeuvre.field_titre_estime
+  module:
+    - link
+id: block_content.estimation_oeuvre.default
+targetEntityType: block_content
+bundle: estimation_oeuvre
+mode: default
+content:
+  field_description_estime:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_image_estime:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_lien_estime:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_titre_estime:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true

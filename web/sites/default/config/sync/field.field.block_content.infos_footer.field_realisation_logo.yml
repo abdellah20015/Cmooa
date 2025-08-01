@@ -1,0 +1,29 @@
+uuid: f5110d14-e88c-4820-ba32-87edb69077c5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.infos_footer
+    - field.storage.block_content.field_realisation_logo
+    - media.type.image
+id: block_content.infos_footer.field_realisation_logo
+field_name: field_realisation_logo
+entity_type: block_content
+bundle: infos_footer
+label: 'Logo réalisation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

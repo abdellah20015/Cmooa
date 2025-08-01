@@ -1,0 +1,9 @@
+uuid: b12d7890-0e08-4c53-be46-a952bc625391
+langcode: fr
+status: true
+dependencies: {  }
+name: Status
+vid: status
+description: null
+weight: 0
+new_revision: false

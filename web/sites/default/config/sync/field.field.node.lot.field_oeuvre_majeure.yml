@@ -1,0 +1,21 @@
+uuid: f6d95b3a-190a-48d1-b796-184134edd34a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_oeuvre_majeure
+    - node.type.lot
+id: node.lot.field_oeuvre_majeure
+field_name: field_oeuvre_majeure
+entity_type: node
+bundle: lot
+label: 'Oeuvre majeure'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

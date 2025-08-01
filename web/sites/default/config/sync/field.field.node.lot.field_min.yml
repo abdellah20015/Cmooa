@@ -1,0 +1,23 @@
+uuid: 5e15f802-252b-450a-8fd2-e13470ac7f02
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_min
+    - node.type.lot
+id: node.lot.field_min
+field_name: field_min
+entity_type: node
+bundle: lot
+label: 'Estimation min'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

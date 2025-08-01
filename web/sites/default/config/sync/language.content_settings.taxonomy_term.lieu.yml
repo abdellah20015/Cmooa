@@ -1,0 +1,11 @@
+uuid: 0224ebae-b92c-4c14-bf37-b481c64c36a6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.lieu
+id: taxonomy_term.lieu
+target_entity_type_id: taxonomy_term
+target_bundle: lieu
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,8 @@
+uuid: 799c74d5-3b17-4ffc-b2f1-fa7b4ac46232
+langcode: fr
+status: true
+dependencies: {  }
+id: social-menu
+label: 'Réseaux sociaux'
+description: 'Menu pour les liens vers les réseaux sociaux'
+locked: false

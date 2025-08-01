@@ -1,0 +1,26 @@
+uuid: 3621902e-e2a0-4255-92bb-d926e4cc1e7f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description_nouvelle
+    - filter.format.basic_html
+    - filter.format.plain_text
+    - node.type.nouvelle
+  module:
+    - text
+id: node.nouvelle.field_description_nouvelle
+field_name: field_description_nouvelle
+entity_type: node
+bundle: nouvelle
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+    - plain_text
+field_type: text_long

@@ -1,0 +1,9 @@
+uuid: 90ad1835-4160-49b4-8f40-13e10347b4ea
+langcode: fr
+status: true
+dependencies: {  }
+name: Lieu
+vid: lieu
+description: null
+weight: 0
+new_revision: false

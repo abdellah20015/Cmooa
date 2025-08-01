@@ -1,0 +1,23 @@
+uuid: f9022ca4-9835-445c-9eb2-d58be3a3728f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_max
+    - node.type.lot
+id: node.lot.field_max
+field_name: field_max
+entity_type: node
+bundle: lot
+label: 'Estimation max'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

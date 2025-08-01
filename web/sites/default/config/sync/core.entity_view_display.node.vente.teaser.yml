@@ -1,0 +1,41 @@
+uuid: d4f3135c-1ba2-47ff-bc8c-914aeae65d1e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.vente.field_date_debut
+    - field.field.node.vente.field_date_fin
+    - field.field.node.vente.field_description
+    - field.field.node.vente.field_document
+    - field.field.node.vente.field_id
+    - field.field.node.vente.field_image_vente
+    - field.field.node.vente.field_images
+    - field.field.node.vente.field_lieu
+    - field.field.node.vente.field_live_vente
+    - field.field.node.vente.field_videos
+    - node.type.vente
+  module:
+    - user
+id: node.vente.teaser
+targetEntityType: node
+bundle: vente
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_date_debut: true
+  field_date_fin: true
+  field_description: true
+  field_document: true
+  field_id: true
+  field_image_vente: true
+  field_images: true
+  field_lieu: true
+  field_live_vente: true
+  field_videos: true
+  langcode: true

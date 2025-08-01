@@ -1,0 +1,9 @@
+uuid: d5519236-b5b6-4415-ad26-c48d56953dee
+langcode: fr
+status: true
+dependencies: {  }
+name: Nouvelles
+vid: nouvelles
+description: null
+weight: 0
+new_revision: false

@@ -1,0 +1,23 @@
+uuid: 631fa882-d3f7-42dc-ba3e-64bb38469d28
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.estimation_oeuvre
+    - field.storage.block_content.field_lien_estime
+  module:
+    - link
+id: block_content.estimation_oeuvre.field_lien_estime
+field_name: field_lien_estime
+entity_type: block_content
+bundle: estimation_oeuvre
+label: Lien
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

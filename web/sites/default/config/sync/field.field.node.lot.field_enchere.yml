@@ -1,0 +1,25 @@
+uuid: 55328e76-689b-4aa6-8e35-06e8c9f2d646
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_enchere
+    - node.type.lot
+id: node.lot.field_enchere
+field_name: field_enchere
+entity_type: node
+bundle: lot
+label: Enchère
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

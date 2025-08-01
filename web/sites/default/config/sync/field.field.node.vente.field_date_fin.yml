@@ -1,0 +1,21 @@
+uuid: 3c525766-27d7-4d73-872e-7c9f3710b064
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_fin
+    - node.type.vente
+  module:
+    - datetime
+id: node.vente.field_date_fin
+field_name: field_date_fin
+entity_type: node
+bundle: vente
+label: 'Date de fin'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

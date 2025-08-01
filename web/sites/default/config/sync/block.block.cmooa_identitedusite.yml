@@ -1,0 +1,23 @@
+uuid: 54187b76-d0bf-404a-8db8-4555994bd2c1
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - cmooa
+id: cmooa_identitedusite
+theme: cmooa
+region: header
+weight: -2
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Identité du site'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

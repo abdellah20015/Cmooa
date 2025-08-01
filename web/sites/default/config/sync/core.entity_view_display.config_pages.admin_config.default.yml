@@ -1,0 +1,21 @@
+uuid: 715a495a-1e03-40da-86a4-869ea7c55f0a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - config_pages.type.admin_config
+    - field.field.config_pages.admin_config.field_telephone
+id: config_pages.admin_config.default
+targetEntityType: config_pages
+bundle: admin_config
+mode: default
+content:
+  field_telephone:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

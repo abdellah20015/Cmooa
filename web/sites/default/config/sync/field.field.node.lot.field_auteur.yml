@@ -1,0 +1,19 @@
+uuid: 9c766c10-28aa-40b9-8a00-5bbcae6464d6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_auteur
+    - node.type.lot
+id: node.lot.field_auteur
+field_name: field_auteur
+entity_type: node
+bundle: lot
+label: 'Auteur (année)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

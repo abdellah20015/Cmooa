@@ -1,0 +1,22 @@
+uuid: 452f4600-5644-4e55-9323-2a693fdc9821
+langcode: fr
+status: true
+dependencies:
+  config:
+    - config_pages.type.admin_config
+    - field.field.config_pages.admin_config.field_telephone
+id: config_pages.admin_config.default
+targetEntityType: config_pages
+bundle: admin_config
+mode: default
+content:
+  field_telephone:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  label: true

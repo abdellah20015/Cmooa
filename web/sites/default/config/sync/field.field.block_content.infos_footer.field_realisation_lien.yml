@@ -1,0 +1,23 @@
+uuid: 40f2636b-1c9c-4310-a67c-06cf5d4eb8a3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.infos_footer
+    - field.storage.block_content.field_realisation_lien
+  module:
+    - link
+id: block_content.infos_footer.field_realisation_lien
+field_name: field_realisation_lien
+entity_type: block_content
+bundle: infos_footer
+label: 'Lien réalisation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

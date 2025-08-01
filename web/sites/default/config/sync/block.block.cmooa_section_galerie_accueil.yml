@@ -1,0 +1,38 @@
+uuid: ed2f87a7-0559-49cb-9aff-1c7744047cd9
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:galerie:b2216775-a09c-4bf3-9715-45ced27f0ab6'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - cmooa
+id: cmooa_section_galerie_accueil
+theme: cmooa
+region: content
+weight: -6
+provider: null
+plugin: 'block_content:b2216775-a09c-4bf3-9715-45ced27f0ab6'
+settings:
+  id: 'block_content:b2216775-a09c-4bf3-9715-45ced27f0ab6'
+  label: 'Section Galerie Accueil'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated

@@ -1,0 +1,9 @@
+uuid: 6cf87b07-fc01-4ac6-8db5-4376d321e8f8
+langcode: fr
+status: true
+dependencies: {  }
+id: fr
+label: French
+direction: ltr
+weight: 0
+locked: false

@@ -1,0 +1,93 @@
+uuid: 50161c54-6d92-4aaa-a5c8-aeb42202dc97
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.infos_footer
+    - field.field.block_content.infos_footer.field_adresse
+    - field.field.block_content.infos_footer.field_email
+    - field.field.block_content.infos_footer.field_horaires
+    - field.field.block_content.infos_footer.field_plan_lien
+    - field.field.block_content.infos_footer.field_realisation_lien
+    - field.field.block_content.infos_footer.field_realisation_logo
+    - field.field.block_content.infos_footer.field_telephone
+  module:
+    - link
+    - media_library
+    - text
+id: block_content.infos_footer.default
+targetEntityType: block_content
+bundle: infos_footer
+mode: default
+content:
+  field_adresse:
+    type: text_textarea
+    weight: 26
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_email:
+    type: link_default
+    weight: 30
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_horaires:
+    type: text_textarea
+    weight: 28
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_plan_lien:
+    type: link_default
+    weight: 27
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_realisation_lien:
+    type: link_default
+    weight: 32
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_realisation_logo:
+    type: media_library_widget
+    weight: 31
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_telephone:
+    type: text_textfield
+    weight: 29
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

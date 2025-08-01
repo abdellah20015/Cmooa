@@ -1,0 +1,30 @@
+uuid: a0b408d6-9413-4bae-8ca4-b373d7d9c22b
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:estimation_oeuvre:f1f66430-034c-44db-8430-40adfaae871a'
+  module:
+    - block_content
+    - system
+  theme:
+    - cmooa
+id: cmooa_estimation_oeuvre
+theme: cmooa
+region: bottom_content
+weight: -7
+provider: null
+plugin: 'block_content:f1f66430-034c-44db-8430-40adfaae871a'
+settings:
+  id: 'block_content:f1f66430-034c-44db-8430-40adfaae871a'
+  label: 'Estimation Œuvre'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

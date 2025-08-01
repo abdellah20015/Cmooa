@@ -1,0 +1,19 @@
+uuid: d45869b7-987f-4a2a-a7e6-149d3a1ba37a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.estimation_oeuvre
+    - field.storage.block_content.field_description_estime
+id: block_content.estimation_oeuvre.field_description_estime
+field_name: field_description_estime
+entity_type: block_content
+bundle: estimation_oeuvre
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

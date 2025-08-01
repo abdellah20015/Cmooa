@@ -1,0 +1,29 @@
+uuid: 057b245f-3131-46d6-844b-b6ca9cae852f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.estimation_oeuvre
+    - field.storage.block_content.field_image_estime
+    - media.type.image
+id: block_content.estimation_oeuvre.field_image_estime
+field_name: field_image_estime
+entity_type: block_content
+bundle: estimation_oeuvre
+label: 'Image estimation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

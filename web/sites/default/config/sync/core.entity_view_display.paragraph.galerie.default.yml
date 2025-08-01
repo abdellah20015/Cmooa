@@ -1,0 +1,37 @@
+uuid: fddaaa19-9a6b-4775-aa2f-0d5e96d25e69
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.galerie.field_image
+    - field.field.paragraph.galerie.field_lien
+    - paragraphs.paragraphs_type.galerie
+  module:
+    - link
+id: paragraph.galerie.default
+targetEntityType: paragraph
+bundle: galerie
+mode: default
+content:
+  field_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_lien:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

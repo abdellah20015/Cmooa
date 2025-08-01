@@ -1,0 +1,19 @@
+uuid: d392d2a6-c211-486f-bc85-b52a54a9d46e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.contact
+    - field.storage.block_content.field_contact_email
+id: block_content.contact.field_contact_email
+field_name: field_contact_email
+entity_type: block_content
+bundle: contact
+label: 'Contact direct (Email)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

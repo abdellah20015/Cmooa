@@ -1,0 +1,21 @@
+uuid: 9c380911-a981-4e61-9c0a-b26a7682b63c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_oeuvre_phare
+    - node.type.lot
+id: node.lot.field_oeuvre_phare
+field_name: field_oeuvre_phare
+entity_type: node
+bundle: lot
+label: 'Oeuvre phare'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

@@ -1,0 +1,21 @@
+uuid: decd52fa-4a8c-411b-ac3d-2ef1156401c2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_debut
+    - node.type.vente
+  module:
+    - datetime
+id: node.vente.field_date_debut
+field_name: field_date_debut
+entity_type: node
+bundle: vente
+label: 'Date de début'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

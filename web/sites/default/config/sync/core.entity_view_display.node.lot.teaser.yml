@@ -1,0 +1,41 @@
+uuid: ef749a00-56dd-4776-8fee-a57656a6c025
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.lot.field_auteur
+    - field.field.node.lot.field_description
+    - field.field.node.lot.field_document
+    - field.field.node.lot.field_enchere
+    - field.field.node.lot.field_image_lot
+    - field.field.node.lot.field_max
+    - field.field.node.lot.field_min
+    - field.field.node.lot.field_oeuvre_majeure
+    - field.field.node.lot.field_oeuvre_phare
+    - field.field.node.lot.field_vente_associee
+    - node.type.lot
+  module:
+    - user
+id: node.lot.teaser
+targetEntityType: node
+bundle: lot
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_auteur: true
+  field_description: true
+  field_document: true
+  field_enchere: true
+  field_image_lot: true
+  field_max: true
+  field_min: true
+  field_oeuvre_majeure: true
+  field_oeuvre_phare: true
+  field_vente_associee: true
+  langcode: true

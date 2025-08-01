@@ -1,0 +1,8 @@
+uuid: bd317082-ecb3-474a-a4b8-6294d4fb000b
+langcode: fr
+status: true
+dependencies: {  }
+id: galerie
+label: Galerie
+revision: false
+description: "Bloc pour afficher la section Galerie sur la page d'accueil."

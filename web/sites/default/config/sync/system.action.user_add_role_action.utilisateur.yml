@@ -1,0 +1,14 @@
+uuid: edb1860f-a524-4bb4-b88a-b63c843fb925
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.utilisateur
+  module:
+    - user
+id: user_add_role_action.utilisateur
+label: 'Add the Utilisateur role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: utilisateur

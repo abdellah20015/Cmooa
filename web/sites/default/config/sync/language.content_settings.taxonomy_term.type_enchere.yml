@@ -1,0 +1,11 @@
+uuid: 77a0333a-2f91-4415-9658-590f9987241e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.type_enchere
+id: taxonomy_term.type_enchere
+target_entity_type_id: taxonomy_term
+target_bundle: type_enchere
+default_langcode: site_default
+language_alterable: false

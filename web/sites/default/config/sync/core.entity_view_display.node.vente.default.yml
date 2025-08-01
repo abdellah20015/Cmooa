@@ -1,0 +1,122 @@
+uuid: ca839c46-e871-4724-b717-7785e4e52ef6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.vente.field_date_debut
+    - field.field.node.vente.field_date_fin
+    - field.field.node.vente.field_description
+    - field.field.node.vente.field_document
+    - field.field.node.vente.field_id
+    - field.field.node.vente.field_image_vente
+    - field.field.node.vente.field_images
+    - field.field.node.vente.field_lieu
+    - field.field.node.vente.field_live_vente
+    - field.field.node.vente.field_videos
+    - node.type.vente
+  module:
+    - datetime
+    - link
+    - user
+id: node.vente.default
+targetEntityType: node
+bundle: vente
+mode: default
+content:
+  field_date_debut:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_date_fin:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_description:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_document:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_image_vente:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_images:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_lieu:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_live_vente:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 117
+    region: content
+  field_videos:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 116
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  langcode: true

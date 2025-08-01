@@ -1,0 +1,20 @@
+uuid: acef7255-6e5b-4e7d-9a63-3accaa137e57
+langcode: fr
+status: true
+dependencies:
+  module:
+    - media
+    - node
+id: node.field_image_vente
+field_name: field_image_vente
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

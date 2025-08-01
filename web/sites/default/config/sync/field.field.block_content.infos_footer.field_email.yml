@@ -1,0 +1,23 @@
+uuid: f82895aa-b5f4-48a0-bb71-12f3680db3b5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.infos_footer
+    - field.storage.block_content.field_email
+  module:
+    - link
+id: block_content.infos_footer.field_email
+field_name: field_email
+entity_type: block_content
+bundle: infos_footer
+label: Email
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

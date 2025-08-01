@@ -1,0 +1,19 @@
+uuid: 9155b15e-71d5-40c9-91f6-292ce49a705b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.contact
+    - field.storage.block_content.field_courriel
+id: block_content.contact.field_courriel
+field_name: field_courriel
+entity_type: block_content
+bundle: contact
+label: Courriel
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

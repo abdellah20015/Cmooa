@@ -1,0 +1,25 @@
+uuid: 48409a96-ddf0-4d8e-9395-0a76acfc207e
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:infos_footer:40dbfad0-f52a-49fb-8bec-59a4e28d60d7'
+  module:
+    - block_content
+  theme:
+    - cmooa
+id: cmooa_inner_footer
+theme: cmooa
+region: footer
+weight: 0
+provider: null
+plugin: 'block_content:40dbfad0-f52a-49fb-8bec-59a4e28d60d7'
+settings:
+  id: 'block_content:40dbfad0-f52a-49fb-8bec-59a4e28d60d7'
+  label: 'Inner Footer'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

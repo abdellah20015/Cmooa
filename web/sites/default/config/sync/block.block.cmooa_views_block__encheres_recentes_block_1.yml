@@ -1,0 +1,29 @@
+uuid: e81c8e04-8c79-4d3b-95ab-702dcb8a44de
+langcode: fr
+status: true
+dependencies:
+  config:
+    - views.view.encheres_recentes
+  module:
+    - system
+    - views
+  theme:
+    - cmooa
+id: cmooa_views_block__encheres_recentes_block_1
+theme: cmooa
+region: bottom_content
+weight: -8
+provider: null
+plugin: 'views_block:encheres_recentes-block_1'
+settings:
+  id: 'views_block:encheres_recentes-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "<front>\r\n"

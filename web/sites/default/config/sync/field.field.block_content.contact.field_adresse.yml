@@ -1,0 +1,26 @@
+uuid: 5a313124-d52c-4af5-bdd3-dc88a6ce3bfd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.contact
+    - field.storage.block_content.field_adresse
+    - filter.format.basic_html
+    - filter.format.plain_text
+  module:
+    - text
+id: block_content.contact.field_adresse
+field_name: field_adresse
+entity_type: block_content
+bundle: contact
+label: Adresse
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+    - plain_text
+field_type: text_long

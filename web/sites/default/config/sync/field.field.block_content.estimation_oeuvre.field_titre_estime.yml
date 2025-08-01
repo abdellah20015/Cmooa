@@ -1,0 +1,19 @@
+uuid: c987a17f-97a8-440c-b739-0c3e4a2c3462
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.estimation_oeuvre
+    - field.storage.block_content.field_titre_estime
+id: block_content.estimation_oeuvre.field_titre_estime
+field_name: field_titre_estime
+entity_type: block_content
+bundle: estimation_oeuvre
+label: Titre
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

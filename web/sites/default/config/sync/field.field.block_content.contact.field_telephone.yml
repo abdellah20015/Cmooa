@@ -1,0 +1,26 @@
+uuid: fce04dd4-e40b-49b2-a9fe-9c084cb082a2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.contact
+    - field.storage.block_content.field_telephone
+    - filter.format.basic_html
+    - filter.format.plain_text
+  module:
+    - text
+id: block_content.contact.field_telephone
+field_name: field_telephone
+entity_type: block_content
+bundle: contact
+label: Téléphone
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+    - plain_text
+field_type: text

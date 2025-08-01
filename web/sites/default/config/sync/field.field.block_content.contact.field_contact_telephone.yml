@@ -1,0 +1,19 @@
+uuid: d1a9e51c-404f-4c7b-bc45-f7b3a4b964a9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.contact
+    - field.storage.block_content.field_contact_telephone
+id: block_content.contact.field_contact_telephone
+field_name: field_contact_telephone
+entity_type: block_content
+bundle: contact
+label: 'Contact direct (Téléphone)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

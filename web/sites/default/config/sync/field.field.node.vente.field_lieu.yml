@@ -1,0 +1,29 @@
+uuid: c308d8c4-f676-4304-aecc-3836d75f208e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lieu
+    - node.type.vente
+    - taxonomy.vocabulary.lieu
+id: node.vente.field_lieu
+field_name: field_lieu
+entity_type: node
+bundle: vente
+label: Lieu
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      lieu: lieu
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

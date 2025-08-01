@@ -1,0 +1,23 @@
+uuid: 89572f5e-e7a5-404a-9bb2-137b7ccec5cb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_lien
+    - paragraphs.paragraphs_type.galerie
+  module:
+    - link
+id: paragraph.galerie.field_lien
+field_name: field_lien
+entity_type: paragraph
+bundle: galerie
+label: Lien
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

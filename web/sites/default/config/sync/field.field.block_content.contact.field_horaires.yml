@@ -1,0 +1,26 @@
+uuid: 85b7d3ce-d778-4980-8bb5-480572321594
+langcode: fr
+status: true
+dependencies:
+  config:
+    - block_content.type.contact
+    - field.storage.block_content.field_horaires
+    - filter.format.basic_html
+    - filter.format.plain_text
+  module:
+    - text
+id: block_content.contact.field_horaires
+field_name: field_horaires
+entity_type: block_content
+bundle: contact
+label: Horaires
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+    - plain_text
+field_type: text_long

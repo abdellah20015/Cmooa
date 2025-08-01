@@ -1,0 +1,59 @@
+uuid: e6b6483f-32b0-43e7-a1ef-a97fac070a4a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.nouvelle.field_categorie_nouvelle
+    - field.field.node.nouvelle.field_date_nouvelle
+    - field.field.node.nouvelle.field_description_nouvelle
+    - field.field.node.nouvelle.field_image_nouvelle
+    - node.type.nouvelle
+  module:
+    - datetime
+    - text
+    - user
+id: node.nouvelle.default
+targetEntityType: node
+bundle: nouvelle
+mode: default
+content:
+  field_categorie_nouvelle:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_date_nouvelle:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_description_nouvelle:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_image_nouvelle:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

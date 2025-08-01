@@ -1,0 +1,9 @@
+uuid: 1ebb6577-a43e-4a4a-8837-3917fe9b491d
+langcode: fr
+status: true
+dependencies: {  }
+name: Utilisation
+vid: utilisation
+description: "Vocabulaire pour définir l'utilisation des nœuds Tableau (Slider, Œuvres Majeures, etc.)"
+weight: 0
+new_revision: false

@@ -1,0 +1,18 @@
+uuid: d733ba24-1009-420b-9545-8e6c79809990
+langcode: fr
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.field_courriel
+field_name: field_courriel
+entity_type: block_content
+type: email
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,34 @@
+uuid: 55679f99-f229-464e-b65c-3afd57de6565
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.galerie.field_image
+    - field.field.paragraph.galerie.field_lien
+    - paragraphs.paragraphs_type.galerie
+  module:
+    - link
+    - media_library
+id: paragraph.galerie.default
+targetEntityType: paragraph
+bundle: galerie
+mode: default
+content:
+  field_image:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_lien:
+    type: link_default
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

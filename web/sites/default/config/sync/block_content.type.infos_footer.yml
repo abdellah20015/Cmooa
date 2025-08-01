@@ -1,0 +1,8 @@
+uuid: 128d48c9-de71-414e-a7ae-a2704769c495
+langcode: fr
+status: true
+dependencies: {  }
+id: infos_footer
+label: 'Infos Footer'
+revision: false
+description: null

@@ -1,0 +1,25 @@
+uuid: b24d8885-6259-49f1-a344-75edf773aac8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.menu-main
+  module:
+    - system
+  theme:
+    - cmooa
+id: cmooa_menuprincipal
+theme: cmooa
+region: header
+weight: -1
+provider: null
+plugin: 'system_menu_block:menu-main'
+settings:
+  id: 'system_menu_block:menu-main'
+  label: 'Menu Principal'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

@@ -1,0 +1,29 @@
+uuid: 8875a5a5-2f35-4140-a5f8-52803f52eebb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.nouvelle.field_categorie_nouvelle
+    - field.field.node.nouvelle.field_date_nouvelle
+    - field.field.node.nouvelle.field_description_nouvelle
+    - field.field.node.nouvelle.field_image_nouvelle
+    - node.type.nouvelle
+  module:
+    - user
+id: node.nouvelle.teaser
+targetEntityType: node
+bundle: nouvelle
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_categorie_nouvelle: true
+  field_date_nouvelle: true
+  field_description_nouvelle: true
+  field_image_nouvelle: true
+  langcode: true

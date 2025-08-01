@@ -1,0 +1,10 @@
+uuid: 0b36c7af-511c-41d9-9a38-ce3ba8889417
+langcode: fr
+status: true
+dependencies: {  }
+id: galerie
+label: Galerie
+icon_uuid: null
+icon_default: null
+description: "Paragraphe pour la section Galerie sur la page d'accueil."
+behavior_plugins: {  }

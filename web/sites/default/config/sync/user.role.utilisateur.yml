@@ -1,0 +1,9 @@
+uuid: 42362d33-b7f2-44c6-8aec-d3bdf7725d8f
+langcode: fr
+status: true
+dependencies: {  }
+id: utilisateur
+label: Utilisateur
+weight: 4
+is_admin: null
+permissions: {  }

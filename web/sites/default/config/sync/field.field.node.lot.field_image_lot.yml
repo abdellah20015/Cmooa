@@ -1,0 +1,29 @@
+uuid: af246690-9be5-43ef-9718-ef85998852e1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_lot
+    - media.type.image
+    - node.type.lot
+id: node.lot.field_image_lot
+field_name: field_image_lot
+entity_type: node
+bundle: lot
+label: 'Image du lot'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
