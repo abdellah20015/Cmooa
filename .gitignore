@@ -1,6 +1,8 @@
 /vendor
 /composer.lock
 /web/sites/default/files/
+/web/sites/default/settings.php
+/web/sites/default/settings.local.php
 /web/sites/default/services.yml
 /web/sites/default/services.local.yml
 /web/sites/default/files/php/twig
@@ -12,7 +14,7 @@
 /web/sites/default/files/php/twig/compiled/*.json
 /web/sites/default/files/php/twig/compiled/*.txt
 /web/sites/default/files/php/twig/compiled/*.xml
-/web/sites/default/files/php/twig/compiled/*.yml 
+/web/sites/default/files/php/twig/compiled/*.yml
 /web/sites/default/files/php/twig/compiled/*.twig
 /web/sites/default/files/php/twig/compiled/*.php.inc
 /web/sites/default/files/php/twig/compiled/*.php.twig
