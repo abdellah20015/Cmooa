@@ -12,7 +12,7 @@
 /web/sites/default/files/php/twig/compiled/*.json
 /web/sites/default/files/php/twig/compiled/*.txt
 /web/sites/default/files/php/twig/compiled/*.xml
-/web/sites/default/files/php/twig/compiled/*.yml
+/web/sites/default/files/php/twig/compiled/*.yml 
 /web/sites/default/files/php/twig/compiled/*.twig
 /web/sites/default/files/php/twig/compiled/*.php.inc
 /web/sites/default/files/php/twig/compiled/*.php.twig
